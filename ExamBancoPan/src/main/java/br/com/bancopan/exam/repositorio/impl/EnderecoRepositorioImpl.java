@@ -1,16 +1,13 @@
-package br.com.bancopan.exam.service.impl;
+package br.com.bancopan.exam.repositorio.impl;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
-import br.com.bancopan.exam.service.def.EnderecoService;
+import br.com.bancopan.exam.repositorio.def.EnderecoRepositorio;
 
-@Service
-public class EnderecoServiceImpl implements EnderecoService {
+public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {
@@ -24,6 +21,7 @@ public class EnderecoServiceImpl implements EnderecoService {
 
 	@Override
 	public List<Municipio> consultarMunicipios(Long idEstado) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
