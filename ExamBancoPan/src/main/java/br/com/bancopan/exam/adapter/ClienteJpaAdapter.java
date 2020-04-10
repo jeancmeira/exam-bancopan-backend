@@ -2,8 +2,10 @@ package br.com.bancopan.exam.adapter;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Cliente;
@@ -14,7 +16,7 @@ import br.com.bancopan.exam.persistence.jpa.entity.ClienteEntity;
 import br.com.bancopan.exam.persistence.jpa.repository.ClienteEntityJpaRepository;
 import br.com.bancopan.exam.port.ClientePort;
 
-@Component
+@Service
 public class ClienteJpaAdapter implements ClientePort {
 
 	@Autowired
@@ -54,6 +56,7 @@ public class ClienteJpaAdapter implements ClientePort {
 	}
 
 	@Override
+	@Transactional
 	public Boolean alterarEndereco(Cliente cliente) {
 		Optional<ClienteEntity> clienteEntityResult = clienteEntityJpaRepository.findByCpf(cliente.getCpf());
 		
@@ -62,8 +65,8 @@ public class ClienteJpaAdapter implements ClientePort {
 		}
 		
 		ClienteEntity clienteEntity = clienteEntityResult.get();
-		clienteEntity.setCep(cliente.getCpf());
-		clienteEntity.setLogradouro(cliente.getEndereco().getCep().getLogradouro());
+		clienteEntity.setCep(cliente.getEndereco().getCep().getCodigo());
+		clienteEntity.setLogradouro(cliente.getEndereco().getLogradouro());
 		clienteEntity.setNumero(cliente.getEndereco().getNumero());
 		clienteEntity.setComplemento(cliente.getEndereco().getComplemento());
 		clienteEntity.setBairro(cliente.getEndereco().getBairro());
@@ -71,14 +74,13 @@ public class ClienteJpaAdapter implements ClientePort {
 		clienteEntity.setEstadoNome(cliente.getEndereco().getMunicipio().getEstado().getNome());
 		clienteEntity.setEstadoSigla(cliente.getEndereco().getMunicipio().getEstado().getSigla());
 		
+		clienteEntityJpaRepository.save(clienteEntity);
+		
 		return Boolean.TRUE;
 	}
 
 	private Cep getCep(ClienteEntity clienteEntity) {
-		Cep cep = new Cep();
-		cep.setCodigo(clienteEntity.getCep());
-		cep.setLogradouro(clienteEntity.getLogradouro());
-		return cep;
+		return new Cep(clienteEntity.getCep());
 	}
 	
 	private Municipio getMunicipio(ClienteEntity clienteEntity, Estado estado) {

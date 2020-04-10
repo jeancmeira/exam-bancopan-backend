@@ -6,6 +6,8 @@ public class Endereco {
 	
 	private Municipio municipio;
 	
+	private String logradouro;
+	
 	private Integer numero;
 	
 	private String complemento;
@@ -51,6 +53,15 @@ public class Endereco {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	
 	
 	
 }

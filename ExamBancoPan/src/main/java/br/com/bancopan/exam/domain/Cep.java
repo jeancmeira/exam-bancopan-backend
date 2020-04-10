@@ -6,6 +6,19 @@ public class Cep {
 	
 	private String logradouro;
 	
+	public Cep(String codigo, String logradouro) {
+		this.codigo = codigo;
+		this.logradouro = logradouro;
+	}
+
+	public Cep(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public Cep() {
+
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -18,8 +31,5 @@ public class Cep {
 		return logradouro;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
 	
 }
