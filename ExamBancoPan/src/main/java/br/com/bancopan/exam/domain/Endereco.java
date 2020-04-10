@@ -9,6 +9,8 @@ public class Endereco {
 	private Integer numero;
 	
 	private String complemento;
+	
+	private String bairro;
 
 	public Cep getCep() {
 		return cep;
@@ -41,5 +43,14 @@ public class Endereco {
 	public void setMunicipio(Municipio municipio) {
 		this.municipio = municipio;
 	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+	
 	
 }
