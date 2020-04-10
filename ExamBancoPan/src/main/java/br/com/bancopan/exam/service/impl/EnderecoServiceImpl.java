@@ -14,7 +14,9 @@ public class EnderecoServiceImpl implements EnderecoService {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {
-		return null;
+		Cep cep = new Cep();
+		
+		return cep;
 	}
 
 	@Override

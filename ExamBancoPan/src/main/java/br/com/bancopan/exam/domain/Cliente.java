@@ -2,19 +2,9 @@ package br.com.bancopan.exam.domain;
 
 public class Cliente {
 
-	private Long codigo;
+	private String cpf;
 	
 	private String nome;
-
-	private String cpf;
-
-	public Long getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
 
 	public String getNome() {
 		return nome;

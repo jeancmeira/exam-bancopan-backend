@@ -10,7 +10,10 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente consultarCliente(String cpf) {
-		return null;
+		Cliente cliente = new Cliente();
+		cliente.setCpf("212.508.688-31");
+		cliente.setNome("Cliente 1");
+		return cliente;
 	}
 
 	@Override
