@@ -41,6 +41,7 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		endereco.setCep(cep);
 		endereco.setNumero(clienteEntity.getNumero());
 		endereco.setComplemento(clienteEntity.getComplemento());
+		endereco.setBairro(clienteEntity.getBairro());
 		
 		Estado estado = getEstado(clienteEntity);
 		endereco.setMunicipio(getMunicipio(clienteEntity, estado));
@@ -69,7 +70,7 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 	private Estado getEstado(ClienteEntity clienteEntity) {
 		Estado estado = new Estado();
 		estado.setSigla(clienteEntity.getEstadoSigla());
-		estado.setNome(clienteEntity.getNome());
+		estado.setNome(clienteEntity.getEstadoNome());
 		return estado;
 	}
 
