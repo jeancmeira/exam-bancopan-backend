@@ -5,6 +5,8 @@ public class Cliente {
 	private String cpf;
 	
 	private String nome;
+	
+	private Endereco endereco;
 
 	public String getNome() {
 		return nome;
@@ -22,6 +24,14 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 	
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	public void alterarEndereco() {
 		
 	}
