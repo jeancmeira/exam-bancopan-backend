@@ -1,6 +1,7 @@
 package br.com.bancopan.exam.repositorio.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.http.HttpEntity;
@@ -47,12 +48,15 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 			return new ArrayList<>();
 		}
 		
+		List<EstadoDTO> estadoDTOListaOrdenada = Arrays.asList(estadosDTO);
+		estadoDTOListaOrdenada.sort((p1, p2) -> p1.getNome().compareTo(p2.getNome()));
+		
 		List<Estado> estados = new ArrayList<>();
 		
 		Estado estadoSP = new Estado(); 
 		Estado estadoRJ = new Estado();
 		
-		for (EstadoDTO estadoDTO : estadosDTO ) {
+		for (EstadoDTO estadoDTO : estadoDTOListaOrdenada ) {
 			
 			Estado estado = new Estado();
 			estado.setSigla(estadoDTO.getSigla());
