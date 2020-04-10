@@ -15,6 +15,7 @@ import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.dto.CepDTO;
+import br.com.bancopan.exam.dto.EstadoDTO;
 import br.com.bancopan.exam.repositorio.def.EnderecoRepositorio;
 
 
@@ -52,8 +53,23 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 
 	@Override
 	public List<Estado> listarEstados() {
+		EstadoDTO[] estadosDTO = get(EstadoDTO[].class, 
+					"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
+		
+		if (estadosDTO == null || estadosDTO.length == 0) {
+			return new ArrayList<>();
+		}
+		
 		List<Estado> estados = new ArrayList<>();
-		estados.add(getEstado());
+		
+		for (EstadoDTO estadoDTO : estadosDTO ) {
+			
+			Estado estado = new Estado();
+			estado.setSigla(estadoDTO.getSigla());
+			estado.setNome(estadoDTO.getNome());
+			estados.add(estado);
+		}
+		
 		return estados;
 	}
 
