@@ -2,19 +2,9 @@ package br.com.bancopan.exam.domain;
 
 public class Estado {
 
-	private Long id;
-	
 	private String sigla;
 	
 	private String nome;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getSigla() {
 		return sigla;

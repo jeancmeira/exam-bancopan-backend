@@ -4,6 +4,8 @@ public class Endereco {
 
 	private Cep cep;
 	
+	private Municipio municipio;
+	
 	private Integer numero;
 	
 	private String complemento;
@@ -30,6 +32,14 @@ public class Endereco {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public Municipio getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
 	}
 	
 }

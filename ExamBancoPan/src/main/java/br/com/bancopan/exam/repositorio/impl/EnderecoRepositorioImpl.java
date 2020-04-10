@@ -16,14 +16,9 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 	@Override
 	public Cep consultarCep(String codigoCep) {
 		
-		Estado estado = getEstado();
-		
-		Municipio municipio = getMunicipio(estado);
-		
 		Cep cep = new Cep();
 		cep.setCodigo("04349000");
 		cep.setLogradouro("RUA DAS GRUMIXAMAS");
-		cep.setMunicipio(municipio);
 		
 		return cep;
 	}
@@ -37,7 +32,6 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 
 	private Estado getEstado() {
 		Estado estado = new Estado();
-		estado.setId(1L);
 		estado.setSigla("SP");
 		estado.setNome("SAO PAULO");
 		return estado;
