@@ -2,9 +2,11 @@ package br.com.bancopan.exam.domain;
 
 public class Endereco {
 
-	private Cep cep;
+	private String cep;
 	
-	private Municipio municipio;
+	private String municipio;
+	
+	private String estado;
 	
 	private String logradouro;
 	
@@ -14,11 +16,11 @@ public class Endereco {
 	
 	private String bairro;
 
-	public Cep getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Cep cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
@@ -38,12 +40,20 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public Municipio getMunicipio() {
+	public String getMunicipio() {
 		return municipio;
 	}
 
-	public void setMunicipio(Municipio municipio) {
+	public void setMunicipio(String municipio) {
 		this.municipio = municipio;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public String getBairro() {

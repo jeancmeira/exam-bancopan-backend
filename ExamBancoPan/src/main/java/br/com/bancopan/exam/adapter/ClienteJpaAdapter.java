@@ -7,11 +7,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
-import br.com.bancopan.exam.domain.Estado;
-import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.persistence.jpa.entity.ClienteEntity;
 import br.com.bancopan.exam.persistence.jpa.repository.ClienteEntityJpaRepository;
 import br.com.bancopan.exam.port.ClientePort;
@@ -37,17 +34,14 @@ public class ClienteJpaAdapter implements ClientePort {
 		cliente.setCpf(clienteEntity.getCpf());
 		cliente.setNome(clienteEntity.getNome());
 		
-		Cep cep = getCep(clienteEntity);
-		
 		Endereco endereco = new Endereco();
-		endereco.setCep(cep);
+		endereco.setLogradouro(clienteEntity.getLogradouro());
+		endereco.setCep(clienteEntity.getCep());
 		endereco.setNumero(clienteEntity.getNumero());
 		endereco.setComplemento(clienteEntity.getComplemento());
 		endereco.setBairro(clienteEntity.getBairro());
-		
-		Estado estado = getEstado(clienteEntity);
-		endereco.setMunicipio(getMunicipio(clienteEntity, estado));
-		
+		endereco.setEstado(clienteEntity.getEstado());
+		endereco.setMunicipio(clienteEntity.getMunicipio());
 		cliente.setEndereco(endereco);
 		
 		cliente.setClientePort(this);
@@ -65,36 +59,18 @@ public class ClienteJpaAdapter implements ClientePort {
 		}
 		
 		ClienteEntity clienteEntity = clienteEntityResult.get();
-		clienteEntity.setCep(cliente.getEndereco().getCep().getCodigo());
+		clienteEntity.setCep(cliente.getEndereco().getCep());
 		clienteEntity.setLogradouro(cliente.getEndereco().getLogradouro());
 		clienteEntity.setNumero(cliente.getEndereco().getNumero());
 		clienteEntity.setComplemento(cliente.getEndereco().getComplemento());
 		clienteEntity.setBairro(cliente.getEndereco().getBairro());
-		clienteEntity.setMunicipio(cliente.getEndereco().getMunicipio().getNome());
-		clienteEntity.setEstadoNome(cliente.getEndereco().getMunicipio().getEstado().getNome());
-		clienteEntity.setEstadoSigla(cliente.getEndereco().getMunicipio().getEstado().getSigla());
+		clienteEntity.setMunicipio(cliente.getEndereco().getMunicipio());
+		clienteEntity.setEstado(cliente.getEndereco().getEstado());
 		
 		clienteEntityJpaRepository.save(clienteEntity);
 		
 		return Boolean.TRUE;
 	}
 
-	private Cep getCep(ClienteEntity clienteEntity) {
-		return new Cep(clienteEntity.getCep());
-	}
-	
-	private Municipio getMunicipio(ClienteEntity clienteEntity, Estado estado) {
-		Municipio municipio = new Municipio();
-		municipio.setEstado(estado);
-		municipio.setNome(clienteEntity.getMunicipio());
-		return municipio;
-	}
-
-	private Estado getEstado(ClienteEntity clienteEntity) {
-		Estado estado = new Estado();
-		estado.setSigla(clienteEntity.getEstadoSigla());
-		estado.setNome(clienteEntity.getEstadoNome());
-		return estado;
-	}
 
 }
