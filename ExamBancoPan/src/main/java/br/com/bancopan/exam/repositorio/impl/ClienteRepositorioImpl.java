@@ -3,6 +3,8 @@ package br.com.bancopan.exam.repositorio.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
 import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
@@ -12,6 +14,7 @@ import br.com.bancopan.exam.service.def.EnderecoService;
 public class ClienteRepositorioImpl implements ClienteRepositorio {
 
 	@Autowired
+	@JsonIgnore
 	private EnderecoService enderecoService;//teste
 	
 	@Override
@@ -25,6 +28,8 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		endereco.setNumero(327);
 		endereco.setComplemento("AP 103");
 		cliente.setEndereco(endereco);
+		
+		cliente.setClienteRepositorio(this);
 		
 		return cliente;
 	}

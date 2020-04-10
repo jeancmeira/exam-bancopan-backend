@@ -1,12 +1,20 @@
 package br.com.bancopan.exam.domain;
 
+import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
+
 public class Cliente {
 
+	private ClienteRepositorio clienteRepositorio; 
+	
 	private String cpf;
 	
 	private String nome;
 	
 	private Endereco endereco;
+
+	public void setClienteRepositorio(ClienteRepositorio clienteRepositorio) {
+		this.clienteRepositorio = clienteRepositorio;
+	}
 
 	public String getNome() {
 		return nome;
@@ -37,6 +45,10 @@ public class Cliente {
 		System.out.println(nome);
 		System.out.println(endereco.getNumero());
 		System.out.println(endereco.getCep().getMunicipio().getEstado().getNome());
+		
+		Cliente clienteBusca = clienteRepositorio.consultarCliente(cpf);
+		System.out.println(clienteBusca.getNome());
+		
 	}
 	
 }
