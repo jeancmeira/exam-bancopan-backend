@@ -2,6 +2,8 @@ package br.com.bancopan.exam.dto;
 
 public class CepDTO {
 	
+	private Boolean erro;
+	
 	private String cep;
 	
 	private String logradouro;
@@ -21,5 +23,14 @@ public class CepDTO {
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
+
+	public Boolean getErro() {
+		return erro;
+	}
+
+	public void setErro(Boolean erro) {
+		this.erro = erro;
+	}
+	
 	
 }

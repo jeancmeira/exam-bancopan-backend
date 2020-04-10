@@ -24,36 +24,16 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {
-		
 		Cep cep = new Cep();
-		//cep.setCodigo("04349000");
-		//cep.setLogradouro("RUA DAS GRUMIXAMAS");
 		
-		
-		RestTemplate restTemplate = new RestTemplate();
-		
-		ResponseEntity<CepDTO> response = restTemplate.exchange(
-				"http://viacep.com.br/ws/{codigoCep}/json",
-		        HttpMethod.GET,
-		        new HttpEntity<>(new HttpHeaders()),
-		        CepDTO.class,
-		        codigoCep
-		);
-
-		// check response
-		if (response.getStatusCode() == HttpStatus.OK) {
-			
-			CepDTO result = response.getBody();
-			cep.setCodigo(result.getCep());
-			cep.setLogradouro(result.getLogradouro());
-			
-			return cep;
-			
-		} else if (response.getStatusCode() == HttpStatus.NOT_FOUND) {
+		CepDTO cepDTO = consultaServicoCep(codigoCep);
+		if (cepDTO == null) {
 			return null;
-		} else {
-			throw new RuntimeException("Error Code: " + response.getStatusCode());
 		}
+		
+		cep.setCodigo(cepDTO.getCep());
+		cep.setLogradouro(cepDTO.getLogradouro());
+		return cep;
 	}
 
 	private Municipio getMunicipio(Estado estado) {
@@ -84,4 +64,34 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 		municipios.add(getMunicipio(estado));
 		return municipios;
 	}
+	
+	private CepDTO consultaServicoCep(String codigoCep) {
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			
+			ResponseEntity<CepDTO> response = restTemplate.exchange(
+					"http://viacep.com.br/ws/{codigoCep}/json",
+			        HttpMethod.GET,
+			        new HttpEntity<>(new HttpHeaders()),
+			        CepDTO.class,
+			        codigoCep
+			);
+
+			if (response.getStatusCode() == HttpStatus.OK) {
+				
+				CepDTO result = response.getBody();
+				if (Boolean.TRUE.equals(result.getErro())) {
+					return null;
+				}
+				
+				return result;
+				
+			} else  {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
 }
