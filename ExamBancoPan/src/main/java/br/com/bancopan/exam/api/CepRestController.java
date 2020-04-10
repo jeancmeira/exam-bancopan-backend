@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.bancopan.exam.api.dto.CepDto;
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
@@ -21,13 +22,23 @@ public class CepRestController {
 	private EnderecoUseCase enderecoUseCase;
 
 	@GetMapping("/{codigoCep}")
-	public ResponseEntity<Cep> consultarCep(@PathVariable String codigoCep) {
-		Cep cep = enderecoUseCase.consultarCep(codigoCep);
-		if (cep != null) {
-			return new ResponseEntity<>(cep, HttpStatus.OK);
+	public ResponseEntity<CepDto> consultarCep(@PathVariable String codigoCep) {
+		CepDto cepDto = consultar(codigoCep);
+		if (cepDto != null) {
+			return new ResponseEntity<>(cepDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+	}
+
+	private CepDto consultar(String codigoCep) {
+		Cep cep = enderecoUseCase.consultarCep(codigoCep);
+		
+		if (cep == null) {
+			return null;
+		}
+		
+		return new CepDto(cep.getCodigo(), cep.getLogradouro());
 	}
 	
 }
