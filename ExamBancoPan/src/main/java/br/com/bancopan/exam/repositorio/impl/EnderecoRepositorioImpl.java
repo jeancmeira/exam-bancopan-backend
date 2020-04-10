@@ -62,13 +62,33 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 		
 		List<Estado> estados = new ArrayList<>();
 		
+		Estado estadoSP = new Estado(); 
+		Estado estadoRJ = new Estado();
+		
 		for (EstadoDTO estadoDTO : estadosDTO ) {
 			
 			Estado estado = new Estado();
 			estado.setSigla(estadoDTO.getSigla());
 			estado.setNome(estadoDTO.getNome());
-			estados.add(estado);
+			
+			if (estadoDTO.getSigla().equals("SP")) {
+				
+				estadoSP.setSigla(estadoDTO.getSigla());
+				estadoSP.setNome(estadoDTO.getNome());
+				
+			} else if (estadoDTO.getSigla().equals("RJ")) {
+
+				estadoRJ.setSigla(estadoDTO.getSigla());
+				estadoRJ.setNome(estadoDTO.getNome());
+				
+			} else {
+				estados.add(estado);	
+			}
+			
 		}
+		
+		estados.add(0, estadoRJ);
+		estados.add(0, estadoSP);
 		
 		return estados;
 	}
