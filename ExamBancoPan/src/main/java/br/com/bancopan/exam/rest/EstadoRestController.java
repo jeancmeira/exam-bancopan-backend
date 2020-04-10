@@ -3,6 +3,8 @@ package br.com.bancopan.exam.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +29,13 @@ public class EstadoRestController {
 	}
 	
 	@GetMapping("/{sigla}/municipio")
-	public List<Municipio> consultarMunicipios(@PathVariable String sigla) {
-		return enderecoService.consultarMunicipios(sigla);
+	public ResponseEntity<List<Municipio>> consultarMunicipios(@PathVariable String sigla) {
+		List<Municipio> municipios = enderecoService.consultarMunicipios(sigla);
+		if (municipios != null && !municipios.isEmpty()) {
+			return new ResponseEntity<>(municipios, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 }
