@@ -44,8 +44,6 @@ public class ClienteJpaAdapter implements ClientePort {
 		endereco.setMunicipio(clienteEntity.getMunicipio());
 		cliente.setEndereco(endereco);
 		
-		cliente.setClientePort(this);
-		
 		return cliente;
 	}
 

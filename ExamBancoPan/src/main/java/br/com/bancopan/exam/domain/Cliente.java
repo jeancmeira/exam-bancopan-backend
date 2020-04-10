@@ -1,23 +1,12 @@
 package br.com.bancopan.exam.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import br.com.bancopan.exam.port.ClientePort;
-
 public class Cliente {
 
-	@JsonIgnore
-	private ClientePort clientePort; 
-	
 	private String cpf;
 	
 	private String nome;
 	
 	private Endereco endereco;
-
-	public void setClientePort(ClientePort clientePort) {
-		this.clientePort = clientePort;
-	}
 
 	public String getNome() {
 		return nome;
@@ -42,13 +31,6 @@ public class Cliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
-	public void alterarEndereco() {
-		//TODO VALIDAR SE ESTA PREENCHIDO
-		
-		clientePort.alterarEndereco(this);
-	}
-	
 }
 
 

@@ -26,7 +26,10 @@ public class ClienteService implements ClienteUseCase {
 
 	@Override
 	public void alterarEndereco(Cliente cliente) {
-		cliente.alterarEndereco();
+		
+		//TODO VALIDAR SE ESTA PREENCHIDO
+		clientePort.alterarEndereco(cliente);		
+		
 	}
 
 }
