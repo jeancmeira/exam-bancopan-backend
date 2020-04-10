@@ -27,10 +27,10 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 	public Cep consultarCep(String codigoCep) {
 		Cep cep = new Cep();
 		
-		CepDTO cepDTO = consultaServicoCep(codigoCep);
-		if (cepDTO == null) {
+		CepDTO cepDTO = get(CepDTO.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
+		if (cepDTO == null || cepDTO.getCep() == null) {
 			return null;
-		}
+		} 
 		
 		cep.setCodigo(cepDTO.getCep());
 		cep.setLogradouro(cepDTO.getLogradouro());
@@ -99,15 +99,6 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 		List<Municipio> municipios = new ArrayList<>();
 		municipios.add(getMunicipio(estado));
 		return municipios;
-	}
-	
-	private CepDTO consultaServicoCep(String codigoCep) {
-		CepDTO result = get(CepDTO.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
-		if (result == null || result.getCep() == null) {
-			return null;
-		} else {
-			return result;
-		}
 	}
 
 	private <T> T get(Class<T> resultClass, String url) {

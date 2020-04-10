@@ -2,9 +2,19 @@ package br.com.bancopan.exam.dto;
 
 public class EstadoDTO {
 
+	private Integer id;
+	
 	private String sigla;
  
 	private String nome;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getSigla() {
 		return sigla;
