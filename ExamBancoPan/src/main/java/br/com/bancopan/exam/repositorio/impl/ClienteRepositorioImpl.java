@@ -1,37 +1,49 @@
 package br.com.bancopan.exam.repositorio.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
+import br.com.bancopan.exam.persistence.entity.ClienteEntity;
+import br.com.bancopan.exam.persistence.repository.ClienteEntityJpaRepository;
 import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
-import br.com.bancopan.exam.service.def.EnderecoService;
 
 @Component
 public class ClienteRepositorioImpl implements ClienteRepositorio {
 
 	@Autowired
-	@JsonIgnore
-	private EnderecoService enderecoService;//teste
+	private ClienteEntityJpaRepository clienteEntityJpaRepository;
 	
 	@Override
 	public Cliente consultarCliente(String cpf) {
+		
+		Optional<ClienteEntity> clienteEntityResult = clienteEntityJpaRepository.findByCpf(cpf);
+		
+		if (!clienteEntityResult.isPresent()) {
+			return null;
+		}
+		
+		ClienteEntity clienteEntity = clienteEntityResult.get();
+		
 		Cliente cliente = new Cliente();
-		cliente.setCpf("212.508.688-31");
-		cliente.setNome("Cliente 1");
+		cliente.setCpf(clienteEntity.getCpf());
+		cliente.setNome(clienteEntity.getNome());
+		
+		Cep cep = getCep(clienteEntity);
 		
 		Endereco endereco = new Endereco();
-		endereco.setCep(enderecoService.consultarCep(null));
-		endereco.setNumero(327);
-		endereco.setComplemento("AP 103");
+		endereco.setCep(cep);
+		endereco.setNumero(clienteEntity.getNumero());
+		endereco.setComplemento(clienteEntity.getComplemento());
 		
-		Estado estado = getEstado();
-		endereco.setMunicipio(getMunicipio(estado));
+		Estado estado = getEstado(clienteEntity);
+		endereco.setMunicipio(getMunicipio(clienteEntity, estado));
 		
 		cliente.setEndereco(endereco);
 		
@@ -39,18 +51,25 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		
 		return cliente;
 	}
+
+	private Cep getCep(ClienteEntity clienteEntity) {
+		Cep cep = new Cep();
+		cep.setCodigo(clienteEntity.getCep());
+		cep.setLogradouro(clienteEntity.getLogradouro());
+		return cep;
+	}
 	
-	private Municipio getMunicipio(Estado estado) {
+	private Municipio getMunicipio(ClienteEntity clienteEntity, Estado estado) {
 		Municipio municipio = new Municipio();
 		municipio.setEstado(estado);
-		municipio.setNome("SAO PAULO");
+		municipio.setNome(clienteEntity.getMunicipio());
 		return municipio;
 	}
 
-	private Estado getEstado() {
+	private Estado getEstado(ClienteEntity clienteEntity) {
 		Estado estado = new Estado();
-		estado.setSigla("SP");
-		estado.setNome("SAO PAULO");
+		estado.setSigla(clienteEntity.getEstadoSigla());
+		estado.setNome(clienteEntity.getNome());
 		return estado;
 	}
 

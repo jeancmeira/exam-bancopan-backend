@@ -25,7 +25,9 @@ public class ClienteEntity {
 	  
 	private String municipio;
 	  
-	private String estado;
+	private String estadoNome;
+	
+	private String estadoSigla;
 
 	public String getCpf() {
 		return cpf;
@@ -91,14 +93,20 @@ public class ClienteEntity {
 		this.municipio = municipio;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getEstadoNome() {
+		return estadoNome;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setEstadoNome(String estadoNome) {
+		this.estadoNome = estadoNome;
 	}
 
-	  
+	public String getEstadoSigla() {
+		return estadoSigla;
+	}
+
+	public void setEstadoSigla(String estadoSigla) {
+		this.estadoSigla = estadoSigla;
+	}
 	
 }

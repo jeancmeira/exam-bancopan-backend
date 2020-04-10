@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import br.com.bancopan.exam.persistence.entity.ClienteEntity;
 
 @Repository
-public interface ClienteJpaRepository extends JpaRepository<ClienteEntity, String> {
+public interface ClienteEntityJpaRepository extends JpaRepository<ClienteEntity, String> {
 
 	Optional<ClienteEntity> findByCpf(String cpf);
 	

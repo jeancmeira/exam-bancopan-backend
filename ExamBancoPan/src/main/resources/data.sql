@@ -9,9 +9,10 @@ CREATE TABLE cliente (
   complemento VARCHAR(1000) NOT NULL,
   bairro VARCHAR(500) NOT NULL,
   municipio VARCHAR(500) NOT NULL,
-  estado VARCHAR(2) NOT NULL
+  estado_nome VARCHAR(100) NOT NULL,
+  estado_sigla VARCHAR(2) NOT NULL
 );
  
-INSERT INTO cliente (cpf, nome, cep, logradouro, numero, complemento, bairro, municipio, estado) VALUES
-  ('21250868831', 'JEAN MEIRA', '04349000', 'RUA DAS GRUMIXAMAS', 327, 'AP 103', 'JABAQUARA', 'SAO PAULO', 'SP');
+INSERT INTO cliente (cpf, nome, cep, logradouro, numero, complemento, bairro, municipio, estado_nome, estado_sigla) VALUES
+  ('21250868831', 'JEAN MEIRA', '04349000', 'RUA DAS GRUMIXAMAS', 327, 'AP 103', 'JABAQUARA', 'SAO PAULO', 'SAO PAULO', 'SP');
 ;

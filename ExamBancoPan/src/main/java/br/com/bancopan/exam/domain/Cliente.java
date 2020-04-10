@@ -1,9 +1,12 @@
 package br.com.bancopan.exam.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
 
 public class Cliente {
 
+	@JsonIgnore
 	private ClienteRepositorio clienteRepositorio; 
 	
 	private String cpf;
