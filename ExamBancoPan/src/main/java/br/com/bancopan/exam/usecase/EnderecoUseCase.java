@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.service.def;
+package br.com.bancopan.exam.usecase;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 
-public interface EnderecoService {
+public interface EnderecoUseCase {
 
 	public Cep consultarCep(@RequestParam String codigoCep);
 	

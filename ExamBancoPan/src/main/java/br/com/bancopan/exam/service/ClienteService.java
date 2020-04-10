@@ -1,14 +1,14 @@
-package br.com.bancopan.exam.service.impl;
+package br.com.bancopan.exam.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.port.ClientePort;
-import br.com.bancopan.exam.service.def.ClienteService;
+import br.com.bancopan.exam.usecase.ClienteUseCase;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClienteService implements ClienteUseCase {
 
 	@Autowired
 	private ClientePort clientePort;

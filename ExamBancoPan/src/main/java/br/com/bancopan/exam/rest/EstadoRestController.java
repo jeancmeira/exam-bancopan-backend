@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
-import br.com.bancopan.exam.service.def.EnderecoService;
+import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
 @RestController
 @RequestMapping("/estado")
@@ -21,16 +21,16 @@ import br.com.bancopan.exam.service.def.EnderecoService;
 public class EstadoRestController {
 
 	@Autowired
-	private EnderecoService enderecoService;
+	private EnderecoUseCase enderecoUseCase;
 	
 	@GetMapping
 	public List<Estado> listarEstados() {
-		return enderecoService.listarEstados();
+		return enderecoUseCase.listarEstados();
 	}
 	
 	@GetMapping("/{sigla}/municipio")
 	public ResponseEntity<List<Municipio>> consultarMunicipios(@PathVariable String sigla) {
-		List<Municipio> municipios = enderecoService.consultarMunicipios(sigla);
+		List<Municipio> municipios = enderecoUseCase.consultarMunicipios(sigla);
 		if (municipios != null && !municipios.isEmpty()) {
 			return new ResponseEntity<>(municipios, HttpStatus.OK);
 		} else {

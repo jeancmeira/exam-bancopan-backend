@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bancopan.exam.domain.Cliente;
-import br.com.bancopan.exam.service.def.ClienteService;
+import br.com.bancopan.exam.usecase.ClienteUseCase;
 
 @RestController
 @RequestMapping("/cliente")
@@ -20,11 +20,11 @@ import br.com.bancopan.exam.service.def.ClienteService;
 public class ClienteRestController {
 
 	@Autowired
-	private ClienteService clienteService;
+	private ClienteUseCase clienteUseCase;
 	
 	@GetMapping("/{cpf}")
 	public ResponseEntity<Cliente> consultarCliente(@PathVariable String cpf) {
-		Cliente cliente = clienteService.consultarCliente(cpf);
+		Cliente cliente = clienteUseCase.consultarCliente(cpf);
 		if (cliente != null) {
 			return new ResponseEntity<>(cliente, HttpStatus.OK);
 		} else {
@@ -34,7 +34,7 @@ public class ClienteRestController {
 	
 	@PostMapping("/{cpf}/endereco")
 	public ResponseEntity<Boolean> alterarEndereco(@RequestBody Cliente cliente) {
-		Boolean retorno = clienteService.alterarEndereco(cliente);
+		Boolean retorno = clienteUseCase.alterarEndereco(cliente);
 		if (retorno) {
 			return new ResponseEntity<>(retorno, HttpStatus.OK);
 		} else {

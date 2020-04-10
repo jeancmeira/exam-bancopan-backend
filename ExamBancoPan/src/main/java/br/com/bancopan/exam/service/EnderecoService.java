@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.service.impl;
+package br.com.bancopan.exam.service;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.port.EnderecoPort;
-import br.com.bancopan.exam.service.def.EnderecoService;
+import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
 @Service
-public class EnderecoServiceImpl implements EnderecoService {
+public class EnderecoService implements EnderecoUseCase {
 
 	@Autowired
 	private EnderecoPort enderecoPort;

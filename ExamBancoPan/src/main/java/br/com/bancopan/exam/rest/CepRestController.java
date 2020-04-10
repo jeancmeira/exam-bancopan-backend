@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bancopan.exam.domain.Cep;
-import br.com.bancopan.exam.service.def.EnderecoService;
+import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
 @RestController
 @RequestMapping("/cep")
@@ -18,11 +18,11 @@ import br.com.bancopan.exam.service.def.EnderecoService;
 public class CepRestController {
 	
 	@Autowired
-	private EnderecoService enderecoService;
+	private EnderecoUseCase enderecoUseCase;
 
 	@GetMapping("/{codigoCep}")
 	public ResponseEntity<Cep> consultarCep(@PathVariable String codigoCep) {
-		Cep cep = enderecoService.consultarCep(codigoCep);
+		Cep cep = enderecoUseCase.consultarCep(codigoCep);
 		if (cep != null) {
 			return new ResponseEntity<>(cep, HttpStatus.OK);
 		} else {
