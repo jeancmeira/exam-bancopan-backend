@@ -66,26 +66,32 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 	}
 	
 	private CepDTO consultaServicoCep(String codigoCep) {
+		CepDTO result = get(CepDTO.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
+		if (result == null || result.getCep() == null) {
+			return null;
+		} else {
+			return result;
+		}
+	}
+
+	private <T> T get(Class<T> resultClass, String url) {
+		return get(resultClass, url, null);
+	}
+	
+	private <T> T get(Class<T> resultClass, String url, Object parameterValue) {
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			
-			ResponseEntity<CepDTO> response = restTemplate.exchange(
-					"http://viacep.com.br/ws/{codigoCep}/json",
+			ResponseEntity<T> response = restTemplate.exchange(
+					url,
 			        HttpMethod.GET,
 			        new HttpEntity<>(new HttpHeaders()),
-			        CepDTO.class,
-			        codigoCep
+			        resultClass,
+			        parameterValue
 			);
 
 			if (response.getStatusCode() == HttpStatus.OK) {
-				
-				CepDTO result = response.getBody();
-				if (Boolean.TRUE.equals(result.getErro())) {
-					return null;
-				}
-				
-				return result;
-				
+				return response.getBody();
 			} else  {
 				return null;
 			}
