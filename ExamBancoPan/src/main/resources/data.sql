@@ -6,7 +6,7 @@ CREATE TABLE cliente (
   cep VARCHAR(8) NOT NULL,
   logradouro VARCHAR(1000) NOT NULL,
   numero INT NOT NULL,
-  complemento VARCHAR(1000) NOT NULL,
+  complemento VARCHAR(1000) NULL,
   bairro VARCHAR(500) NOT NULL,
   municipio VARCHAR(500) NOT NULL,
   estado VARCHAR(2) NOT NULL

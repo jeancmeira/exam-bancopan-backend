@@ -10,6 +10,7 @@ import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.port.EnderecoPort;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
+import br.com.bancopan.exam.validation.CampoObrigatorioException;
 
 @Service
 public class EnderecoService implements EnderecoUseCase {
@@ -29,6 +30,11 @@ public class EnderecoService implements EnderecoUseCase {
 
 	@Override
 	public List<Municipio> consultarMunicipios(String sigla) {
+		
+		if (sigla == null || sigla.trim().equals("")) {
+			throw new CampoObrigatorioException("estado");
+		}
+		
 		return enderecoPort.consultarMunicipios(sigla);
 	}
 
