@@ -24,18 +24,22 @@ public class ClienteService implements ClienteUseCase {
 		
 		//TODO VALIDAR SE ESTA PREENCHIDO
 		
-		Cliente clienteBusca = consultarCliente(cliente.getCpf());
-		if (clienteBusca == null) {
+		Cliente clienteExistente = consultarCliente(cliente.getCpf());
+		if (clienteExistente == null) {
 			return Boolean.FALSE;
 		}
 		
-		Endereco endereco = clienteBusca.getEndereco();
-		endereco.setBairro(cliente.getEndereco().getBairro());
+		Endereco endereco = clienteExistente.getEndereco();
+		
+		endereco.setCep(cliente.getEndereco().getCep());
+		endereco.setLogradouro(cliente.getEndereco().getLogradouro());
 		endereco.setNumero(cliente.getEndereco().getNumero());
+		endereco.setComplemento(cliente.getEndereco().getComplemento());
+		endereco.setBairro(cliente.getEndereco().getBairro());
+		endereco.setMunicipio(cliente.getEndereco().getMunicipio());
+		endereco.setEstado(cliente.getEndereco().getEstado());
 		
-		
-		
-		clienteBusca.alterarEndereco();
+		clienteExistente.alterarEndereco();
 		
 		return Boolean.TRUE;
 	}
