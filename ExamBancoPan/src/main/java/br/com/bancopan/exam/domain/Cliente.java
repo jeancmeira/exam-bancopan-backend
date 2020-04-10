@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.model;
+package br.com.bancopan.exam.domain;
 
 public class Cliente {
 
