@@ -29,4 +29,8 @@ public class ClienteRestController {
 		return clientes;
 	}
 	
+	public Boolean alterarEndereco(Cliente cliente) {
+		return Boolean.TRUE;
+	}
+	
 }
