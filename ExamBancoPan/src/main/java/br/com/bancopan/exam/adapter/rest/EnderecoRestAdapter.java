@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.adapter;
+package br.com.bancopan.exam.adapter.rest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,9 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
-import br.com.bancopan.exam.dto.CepDTO;
-import br.com.bancopan.exam.dto.EstadoDTO;
-import br.com.bancopan.exam.dto.MunicipioDTO;
 import br.com.bancopan.exam.port.EnderecoPort;
 
 
@@ -27,45 +24,45 @@ public class EnderecoRestAdapter implements EnderecoPort {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {
-		CepDTO cepDTO = get(CepDTO.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
-		if (cepDTO == null || cepDTO.getCep() == null) {
+		CepAdapterDto cepAdapterDto = get(CepAdapterDto.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
+		if (cepAdapterDto == null || cepAdapterDto.getCep() == null) {
 			return null;
 		} 
 		
-		return new Cep(cepDTO.getCep(),
-				cepDTO.getLogradouro());
+		return new Cep(cepAdapterDto.getCep(),
+				cepAdapterDto.getLogradouro());
 	}
 
 	@Override
 	public List<Estado> listarEstados() {
-		EstadoDTO[] estadosDTO = get(EstadoDTO[].class, 
+		EstadoAdapterDto[] estadosAdapterDto = get(EstadoAdapterDto[].class, 
 					"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
 		
-		if (estadosDTO == null || estadosDTO.length == 0) {
+		if (estadosAdapterDto == null || estadosAdapterDto.length == 0) {
 			return new ArrayList<>();
 		}
 		
-		List<EstadoDTO> estadoDTOListaOrdenada = Arrays.asList(estadosDTO);
-		estadoDTOListaOrdenada.sort((p1, p2) -> p1.getNome().compareTo(p2.getNome()));
+		List<EstadoAdapterDto> estadoAdapterDtoListaOrdenada = Arrays.asList(estadosAdapterDto);
+		estadoAdapterDtoListaOrdenada.sort((p1, p2) -> p1.getNome().compareTo(p2.getNome()));
 		
 		List<Estado> estados = new ArrayList<>();
 		
 		Estado estadoSP = null; 
 		Estado estadoRJ = null;
 		
-		for (EstadoDTO estadoDTO : estadoDTOListaOrdenada ) {
+		for (EstadoAdapterDto estadoAdapterDto : estadoAdapterDtoListaOrdenada ) {
 			
-			if (estadoDTO.getSigla().equals("SP")) {
+			if (estadoAdapterDto.getSigla().equals("SP")) {
 				
-				estadoSP = new Estado(estadoDTO.getSigla(), estadoDTO.getNome());
+				estadoSP = new Estado(estadoAdapterDto.getSigla(), estadoAdapterDto.getNome());
 				
-			} else if (estadoDTO.getSigla().equals("RJ")) {
+			} else if (estadoAdapterDto.getSigla().equals("RJ")) {
 				
-				estadoRJ = new Estado(estadoDTO.getSigla(), estadoDTO.getNome());
+				estadoRJ = new Estado(estadoAdapterDto.getSigla(), estadoAdapterDto.getNome());
 				
 			} else {
 				
-				estados.add(new Estado(estadoDTO.getSigla(), estadoDTO.getNome()));
+				estados.add(new Estado(estadoAdapterDto.getSigla(), estadoAdapterDto.getNome()));
 				
 			}
 			
@@ -84,46 +81,46 @@ public class EnderecoRestAdapter implements EnderecoPort {
 
 	@Override
 	public List<Municipio> consultarMunicipios(String sigla) {
-		EstadoDTO[] estadosDTO = get(EstadoDTO[].class, 
+		EstadoAdapterDto[] estadosAdapterDto = get(EstadoAdapterDto[].class, 
 				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
 	
-		if (estadosDTO == null || estadosDTO.length == 0) {
+		if (estadosAdapterDto == null || estadosAdapterDto.length == 0) {
 			return new ArrayList<>();
 		}
 
-		EstadoDTO estadoDoMunicipioDTO = null;
+		EstadoAdapterDto estadoDoMunicipioAdapterDto = null;
 		
-		for (EstadoDTO estadoDTO : estadosDTO ) {
+		for (EstadoAdapterDto estadoAdapterDto : estadosAdapterDto ) {
 			
-			if (estadoDTO.getSigla().equalsIgnoreCase(sigla)) {
+			if (estadoAdapterDto.getSigla().equalsIgnoreCase(sigla)) {
 				
-				estadoDoMunicipioDTO = new EstadoDTO();
-				estadoDoMunicipioDTO.setId(estadoDTO.getId());
-				estadoDoMunicipioDTO.setSigla(estadoDTO.getSigla());
-				estadoDoMunicipioDTO.setNome(estadoDTO.getNome());
+				estadoDoMunicipioAdapterDto = new EstadoAdapterDto();
+				estadoDoMunicipioAdapterDto.setId(estadoAdapterDto.getId());
+				estadoDoMunicipioAdapterDto.setSigla(estadoAdapterDto.getSigla());
+				estadoDoMunicipioAdapterDto.setNome(estadoAdapterDto.getNome());
 				break;
 			}
 		}
 		
-		if (estadoDoMunicipioDTO == null) {
+		if (estadoDoMunicipioAdapterDto == null) {
 			return new ArrayList<>();
 		}
 		
-		Estado estado = new Estado(estadoDoMunicipioDTO.getSigla(),
-						estadoDoMunicipioDTO.getNome());
+		Estado estado = new Estado(estadoDoMunicipioAdapterDto.getSigla(),
+						estadoDoMunicipioAdapterDto.getNome());
 		
-		MunicipioDTO[] municipiosDTO = get(MunicipioDTO[].class, 
+		MunicipioAdapterDto[] municipiosAdapterDto = get(MunicipioAdapterDto[].class, 
 				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/{idEstado}/municipios",
-							estadoDoMunicipioDTO.getId());
+							estadoDoMunicipioAdapterDto.getId());
 		
-		if (municipiosDTO == null || municipiosDTO.length == 0) {
+		if (municipiosAdapterDto == null || municipiosAdapterDto.length == 0) {
 			return new ArrayList<>();
 		}
 		
 		List<Municipio> municipios = new ArrayList<>();
 		
-		for (MunicipioDTO municipioDTO : municipiosDTO ) {
-			municipios.add(new Municipio(estado.getSigla(), municipioDTO.getNome()));
+		for (MunicipioAdapterDto municipioAdapterDto : municipiosAdapterDto ) {
+			municipios.add(new Municipio(estado.getSigla(), municipioAdapterDto.getNome()));
 		}
 		
 		return municipios;

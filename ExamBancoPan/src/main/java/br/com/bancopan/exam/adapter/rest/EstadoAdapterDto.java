@@ -1,6 +1,6 @@
-package br.com.bancopan.exam.dto;
+package br.com.bancopan.exam.adapter.rest;
 
-public class EstadoDTO {
+public class EstadoAdapterDto {
 
 	private Integer id;
 	

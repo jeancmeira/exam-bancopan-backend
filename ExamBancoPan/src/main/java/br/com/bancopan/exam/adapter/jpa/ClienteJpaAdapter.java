@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.adapter;
+package br.com.bancopan.exam.adapter.jpa;
 
 import java.util.Optional;
 
