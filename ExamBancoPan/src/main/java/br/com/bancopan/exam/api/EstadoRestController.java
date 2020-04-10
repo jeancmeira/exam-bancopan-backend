@@ -42,6 +42,7 @@ public class EstadoRestController {
 	@GetMapping("/{sigla}/municipio")
 	public ResponseEntity<List<MunicipioDto>> consultarMunicipios(@PathVariable String sigla) {
 		List<MunicipioDto> municipiosDto = consultar(sigla);
+		
 		if (municipiosDto != null) {
 			return new ResponseEntity<>(municipiosDto, HttpStatus.OK);
 		} else {
