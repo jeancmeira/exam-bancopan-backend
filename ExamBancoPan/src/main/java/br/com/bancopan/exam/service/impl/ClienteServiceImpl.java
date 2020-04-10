@@ -17,8 +17,8 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public void alterarEndereco(Cliente cliente) {
-		
+	public Boolean alterarEndereco(Cliente cliente) {
+		return Boolean.TRUE;
 	}
 
 }

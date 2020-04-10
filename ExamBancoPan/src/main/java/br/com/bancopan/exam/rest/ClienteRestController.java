@@ -1,6 +1,8 @@
 package br.com.bancopan.exam.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +23,23 @@ public class ClienteRestController {
 	private ClienteService clienteService;
 	
 	@GetMapping("/{cpf}")
-	public Cliente consultarCliente(@PathVariable String cpf) {
-		return clienteService.consultarCliente(cpf);
+	public ResponseEntity<Cliente> consultarCliente(@PathVariable String cpf) {
+		Cliente cliente = clienteService.consultarCliente(cpf);
+		if (cliente != null) {
+			return new ResponseEntity<>(cliente, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 	@PostMapping("/{cpf}/endereco")
-	public Boolean alterarEndereco(@RequestBody Cliente cliente) {
-		clienteService.alterarEndereco(cliente);
-		return Boolean.TRUE;
+	public ResponseEntity<Boolean> alterarEndereco(@RequestBody Cliente cliente) {
+		Boolean retorno = clienteService.alterarEndereco(cliente);
+		if (retorno) {
+			return new ResponseEntity<>(retorno, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 }
