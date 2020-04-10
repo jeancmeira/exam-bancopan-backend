@@ -53,6 +53,27 @@ public class ClienteJpaAdapter implements ClientePort {
 		return cliente;
 	}
 
+	@Override
+	public Boolean alterarEndereco(Cliente cliente) {
+		Optional<ClienteEntity> clienteEntityResult = clienteEntityJpaRepository.findByCpf(cliente.getCpf());
+		
+		if (!clienteEntityResult.isPresent()) {
+			return null;
+		}
+		
+		ClienteEntity clienteEntity = clienteEntityResult.get();
+		clienteEntity.setCep(cliente.getCpf());
+		clienteEntity.setLogradouro(cliente.getEndereco().getCep().getLogradouro());
+		clienteEntity.setNumero(cliente.getEndereco().getNumero());
+		clienteEntity.setComplemento(cliente.getEndereco().getComplemento());
+		clienteEntity.setBairro(cliente.getEndereco().getBairro());
+		clienteEntity.setMunicipio(cliente.getEndereco().getMunicipio().getNome());
+		clienteEntity.setEstadoNome(cliente.getEndereco().getMunicipio().getEstado().getNome());
+		clienteEntity.setEstadoSigla(cliente.getEndereco().getMunicipio().getEstado().getSigla());
+		
+		return Boolean.TRUE;
+	}
+
 	private Cep getCep(ClienteEntity clienteEntity) {
 		Cep cep = new Cep();
 		cep.setCodigo(clienteEntity.getCep());
@@ -72,18 +93,6 @@ public class ClienteJpaAdapter implements ClientePort {
 		estado.setSigla(clienteEntity.getEstadoSigla());
 		estado.setNome(clienteEntity.getEstadoNome());
 		return estado;
-	}
-
-
-	@Override
-	public void alterarEndereco(Cliente cliente) {
-		System.out.println(cliente.getCpf());
-		System.out.println(cliente.getNome());
-		System.out.println(cliente.getEndereco().getNumero());
-		System.out.println(cliente.getEndereco().getCep().getCodigo());
-		System.out.println(cliente.getEndereco().getMunicipio().getNome());
-		System.out.println(cliente.getEndereco().getMunicipio().getEstado().getSigla());
-		
 	}
 
 }
