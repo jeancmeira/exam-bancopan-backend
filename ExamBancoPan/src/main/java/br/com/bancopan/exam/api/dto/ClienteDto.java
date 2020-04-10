@@ -1,23 +1,35 @@
 package br.com.bancopan.exam.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class ClienteDto {
 	
+	@JsonInclude(Include.NON_NULL)
 	private String cpf;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String nome;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String cep;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String municipio;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String estado;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String logradouro;
 	
+	@JsonInclude(Include.NON_NULL)
 	private Integer numero;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String complemento;
 	
+	@JsonInclude(Include.NON_NULL)
 	private String bairro;
 
 	public String getNome() {
