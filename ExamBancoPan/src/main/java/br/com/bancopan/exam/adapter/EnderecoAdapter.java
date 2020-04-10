@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.repositorio.impl;
+package br.com.bancopan.exam.adapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,12 +18,12 @@ import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.dto.CepDTO;
 import br.com.bancopan.exam.dto.EstadoDTO;
 import br.com.bancopan.exam.dto.MunicipioDTO;
-import br.com.bancopan.exam.repositorio.def.EnderecoRepositorio;
+import br.com.bancopan.exam.port.EnderecoPort;
 
 
 
 @Component
-public class EnderecoRepositorioImpl implements EnderecoRepositorio {
+public class EnderecoAdapter implements EnderecoPort {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {

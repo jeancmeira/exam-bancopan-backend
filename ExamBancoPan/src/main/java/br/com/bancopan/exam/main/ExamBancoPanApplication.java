@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan("br.com.bancopan.exam")
-@EnableJpaRepositories("br.com.bancopan.exam.persistence.repository")
-@EntityScan("br.com.bancopan.exam.persistence.entity")
+@EnableJpaRepositories("br.com.bancopan.exam.persistence.jpa.repository")
+@EntityScan("br.com.bancopan.exam.persistence.jpa.entity")
 public class ExamBancoPanApplication {
 
 	public static void main(String[] args) {

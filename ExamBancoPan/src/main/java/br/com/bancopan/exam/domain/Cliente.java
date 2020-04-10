@@ -2,12 +2,12 @@ package br.com.bancopan.exam.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
+import br.com.bancopan.exam.port.ClientePort;
 
 public class Cliente {
 
 	@JsonIgnore
-	private ClienteRepositorio clienteRepositorio; 
+	private ClientePort clientePort; 
 	
 	private String cpf;
 	
@@ -15,8 +15,8 @@ public class Cliente {
 	
 	private Endereco endereco;
 
-	public void setClienteRepositorio(ClienteRepositorio clienteRepositorio) {
-		this.clienteRepositorio = clienteRepositorio;
+	public void setClientePort(ClientePort clientePort) {
+		this.clientePort = clientePort;
 	}
 
 	public String getNome() {
@@ -44,7 +44,7 @@ public class Cliente {
 	}
 
 	public void alterarEndereco() {
-		clienteRepositorio.alterarEndereco(this);
+		clientePort.alterarEndereco(this);
 	}
 	
 }

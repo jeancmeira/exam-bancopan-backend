@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.persistence.entity;
+package br.com.bancopan.exam.persistence.jpa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

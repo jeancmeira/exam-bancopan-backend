@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.repositorio.def;
+package br.com.bancopan.exam.port;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 
-public interface EnderecoRepositorio {
+public interface EnderecoPort {
 
 	public Cep consultarCep(@RequestParam String codigoCep);
 	

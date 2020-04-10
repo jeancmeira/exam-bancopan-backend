@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.repositorio.impl;
+package br.com.bancopan.exam.adapter;
 
 import java.util.Optional;
 
@@ -10,12 +10,12 @@ import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
-import br.com.bancopan.exam.persistence.entity.ClienteEntity;
-import br.com.bancopan.exam.persistence.repository.ClienteEntityJpaRepository;
-import br.com.bancopan.exam.repositorio.def.ClienteRepositorio;
+import br.com.bancopan.exam.persistence.jpa.entity.ClienteEntity;
+import br.com.bancopan.exam.persistence.jpa.repository.ClienteEntityJpaRepository;
+import br.com.bancopan.exam.port.ClientePort;
 
 @Component
-public class ClienteRepositorioImpl implements ClienteRepositorio {
+public class ClienteAdapter implements ClientePort {
 
 	@Autowired
 	private ClienteEntityJpaRepository clienteEntityJpaRepository;
@@ -48,7 +48,7 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		
 		cliente.setEndereco(endereco);
 		
-		cliente.setClienteRepositorio(this);
+		cliente.setClientePort(this);
 		
 		return cliente;
 	}
