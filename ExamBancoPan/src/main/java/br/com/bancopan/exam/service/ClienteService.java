@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.port.ClientePort;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
+import br.com.bancopan.exam.validation.CpfObrigatorioException;
 
 @Service
 public class ClienteService implements ClienteUseCase {
@@ -15,6 +16,11 @@ public class ClienteService implements ClienteUseCase {
 	
 	@Override
 	public Cliente consultarCliente(String cpf) {
+		
+		if (cpf == null || cpf.trim().equals("")) {
+			throw new CpfObrigatorioException();
+		}
+		
 		return clientePort.consultarCliente(cpf);
 	}
 
