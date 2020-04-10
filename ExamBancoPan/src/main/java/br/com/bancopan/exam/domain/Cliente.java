@@ -32,7 +32,9 @@ public class Cliente {
 		this.cpf = cpf;
 	}
 	
-	
+	public void alterarEndereco() {
+		
+	}
 	
 }
 
