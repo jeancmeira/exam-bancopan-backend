@@ -60,7 +60,7 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		System.out.println(cliente.getCpf());
 		System.out.println(cliente.getNome());
 		System.out.println(cliente.getEndereco().getNumero());
-		System.out.println(cliente.getEndereco().getCep());
+		System.out.println(cliente.getEndereco().getCep().getCodigo());
 		System.out.println(cliente.getEndereco().getMunicipio().getNome());
 		System.out.println(cliente.getEndereco().getMunicipio().getEstado().getSigla());
 		
