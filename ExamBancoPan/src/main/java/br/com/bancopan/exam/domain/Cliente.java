@@ -44,6 +44,8 @@ public class Cliente {
 	}
 
 	public void alterarEndereco() {
+		//TODO VALIDAR SE ESTA PREENCHIDO
+		
 		clientePort.alterarEndereco(this);
 	}
 	

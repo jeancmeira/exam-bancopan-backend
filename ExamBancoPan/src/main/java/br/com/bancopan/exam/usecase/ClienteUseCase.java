@@ -8,6 +8,6 @@ public interface ClienteUseCase {
 
 	public Cliente consultarCliente(@PathVariable String cpf);
 
-	public Boolean alterarEndereco(Cliente cliente); 
+	public void alterarEndereco(Cliente cliente); 
 		
 }

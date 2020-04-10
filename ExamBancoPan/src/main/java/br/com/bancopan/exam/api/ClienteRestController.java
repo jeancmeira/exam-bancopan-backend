@@ -34,13 +34,25 @@ public class ClienteRestController {
 	}
 
 	@PostMapping("/{cpf}/endereco")
-	public ResponseEntity<Boolean> alterarEndereco(@RequestBody Cliente cliente) {
-		Boolean retorno = clienteUseCase.alterarEndereco(cliente);
-		if (retorno) {
-			return new ResponseEntity<>(retorno, HttpStatus.OK);
-		} else {
+	public ResponseEntity<Boolean> alterarEndereco(@RequestBody ClienteDto clienteDto) {
+		
+		Cliente cliente = clienteUseCase.consultarCliente(clienteDto.getCpf());
+		if (cliente == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+		
+		cliente.setCpf(cliente.getCpf());
+		cliente.getEndereco().setCep(clienteDto.getCep());
+		cliente.getEndereco().setMunicipio(clienteDto.getMunicipio());
+		cliente.getEndereco().setEstado(clienteDto.getEstado());
+		cliente.getEndereco().setLogradouro(clienteDto.getLogradouro());
+		cliente.getEndereco().setNumero(clienteDto.getNumero());
+		cliente.getEndereco().setComplemento(clienteDto.getComplemento());
+		cliente.getEndereco().setBairro(clienteDto.getBairro());
+		
+		clienteUseCase.alterarEndereco(cliente); 
+		
+		return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
 	}
 	
 	private ClienteDto consultar(String cpf) {
