@@ -6,22 +6,18 @@ public class Municipio {
 	
 	private String nome;
 
-	public Estado getEstado() {
-		return estado;
+	public Municipio(Estado estado, String nome) {
+		this.estado = estado;
+		this.nome = nome;
 	}
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
+	public Estado getEstado() {
+		return estado;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	
 	
 }

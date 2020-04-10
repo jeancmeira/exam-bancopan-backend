@@ -6,20 +6,18 @@ public class Estado {
 	
 	private String nome;
 
-	public String getSigla() {
-		return sigla;
+	public Estado(String sigla, String nome) {
+		this.sigla = sigla;
+		this.nome = nome;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public String getSigla() {
+		return sigla;
 	}
 
 	public String getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 	
 }

@@ -50,33 +50,34 @@ public class EnderecoRestAdapter implements EnderecoPort {
 		
 		List<Estado> estados = new ArrayList<>();
 		
-		Estado estadoSP = new Estado(); 
-		Estado estadoRJ = new Estado();
+		Estado estadoSP = null; 
+		Estado estadoRJ = null;
 		
 		for (EstadoDTO estadoDTO : estadoDTOListaOrdenada ) {
 			
-			Estado estado = new Estado();
-			estado.setSigla(estadoDTO.getSigla());
-			estado.setNome(estadoDTO.getNome());
-			
 			if (estadoDTO.getSigla().equals("SP")) {
 				
-				estadoSP.setSigla(estadoDTO.getSigla());
-				estadoSP.setNome(estadoDTO.getNome());
+				estadoSP = new Estado(estadoDTO.getSigla(), estadoDTO.getNome());
 				
 			} else if (estadoDTO.getSigla().equals("RJ")) {
-
-				estadoRJ.setSigla(estadoDTO.getSigla());
-				estadoRJ.setNome(estadoDTO.getNome());
+				
+				estadoRJ = new Estado(estadoDTO.getSigla(), estadoDTO.getNome());
 				
 			} else {
-				estados.add(estado);	
+				
+				estados.add(new Estado(estadoDTO.getSigla(), estadoDTO.getNome()));
+				
 			}
 			
 		}
 		
-		estados.add(0, estadoRJ);
-		estados.add(0, estadoSP);
+		if (estadoRJ != null) {
+			estados.add(0, estadoRJ);
+		}
+		
+		if (estadoSP != null) {
+			estados.add(0, estadoSP);
+		}
 		
 		return estados;
 	}
@@ -108,9 +109,8 @@ public class EnderecoRestAdapter implements EnderecoPort {
 			return new ArrayList<>();
 		}
 		
-		Estado estado = new Estado();
-		estado.setSigla(estadoDoMunicipioDTO.getSigla());
-		estado.setNome(estadoDoMunicipioDTO.getNome());
+		Estado estado = new Estado(estadoDoMunicipioDTO.getSigla(),
+						estadoDoMunicipioDTO.getNome());
 		
 		MunicipioDTO[] municipiosDTO = get(MunicipioDTO[].class, 
 				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/{idEstado}/municipios",
@@ -123,10 +123,7 @@ public class EnderecoRestAdapter implements EnderecoPort {
 		List<Municipio> municipios = new ArrayList<>();
 		
 		for (MunicipioDTO municipioDTO : municipiosDTO ) {
-			Municipio municipio = new Municipio();
-			municipio.setNome(municipioDTO.getNome());
-			municipio.setEstado(estado);
-			municipios.add(municipio);
+			municipios.add(new Municipio(estado, municipioDTO.getNome()));
 		}
 		
 		return municipios;
