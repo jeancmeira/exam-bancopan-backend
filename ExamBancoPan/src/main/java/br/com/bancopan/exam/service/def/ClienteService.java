@@ -8,6 +8,6 @@ public interface ClienteService {
 
 	public Cliente consultarCliente(@PathVariable String cpf);
 
-	public void consultarCliente(Cliente cliente); 
+	public void alterarEndereco(Cliente cliente); 
 		
 }

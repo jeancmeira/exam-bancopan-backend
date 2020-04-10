@@ -27,7 +27,7 @@ public class ClienteRestController {
 	
 	@PostMapping("/{cpf}/endereco")
 	public Boolean alterarEndereco(@RequestBody Cliente cliente) {
-		clienteService.consultarCliente(cliente);
+		clienteService.alterarEndereco(cliente);
 		return Boolean.TRUE;
 	}
 	
