@@ -123,7 +123,7 @@ public class EnderecoRestAdapter implements EnderecoPort {
 		List<Municipio> municipios = new ArrayList<>();
 		
 		for (MunicipioDTO municipioDTO : municipiosDTO ) {
-			municipios.add(new Municipio(estado, municipioDTO.getNome()));
+			municipios.add(new Municipio(estado.getSigla(), municipioDTO.getNome()));
 		}
 		
 		return municipios;

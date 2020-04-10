@@ -2,16 +2,16 @@ package br.com.bancopan.exam.domain;
 
 public class Municipio {
 
-	private Estado estado;
+	private String estado;
 	
 	private String nome;
 
-	public Municipio(Estado estado, String nome) {
+	public Municipio(String estado, String nome) {
 		this.estado = estado;
 		this.nome = nome;
 	}
 
-	public Estado getEstado() {
+	public String getEstado() {
 		return estado;
 	}
 
