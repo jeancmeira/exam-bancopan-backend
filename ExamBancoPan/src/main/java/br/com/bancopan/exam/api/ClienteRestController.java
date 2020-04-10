@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.rest;
+package br.com.bancopan.exam.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

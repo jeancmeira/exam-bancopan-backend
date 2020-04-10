@@ -12,6 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.bancopan.exam.adapter.rest.dto.CepAdapterDto;
+import br.com.bancopan.exam.adapter.rest.dto.EstadoAdapterDto;
+import br.com.bancopan.exam.adapter.rest.dto.MunicipioAdapterDto;
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;

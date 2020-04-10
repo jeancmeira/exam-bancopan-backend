@@ -1,4 +1,4 @@
-package br.com.bancopan.exam.adapter.rest;
+package br.com.bancopan.exam.adapter.rest.dto;
 
 public class CepAdapterDto {
 	
