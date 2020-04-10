@@ -16,6 +16,7 @@ import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.dto.CepDTO;
 import br.com.bancopan.exam.dto.EstadoDTO;
+import br.com.bancopan.exam.dto.MunicipioDTO;
 import br.com.bancopan.exam.repositorio.def.EnderecoRepositorio;
 
 
@@ -35,20 +36,6 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 		cep.setCodigo(cepDTO.getCep());
 		cep.setLogradouro(cepDTO.getLogradouro());
 		return cep;
-	}
-
-	private Municipio getMunicipio(Estado estado) {
-		Municipio municipio = new Municipio();
-		municipio.setEstado(estado);
-		municipio.setNome("SAO PAULO");
-		return municipio;
-	}
-
-	private Estado getEstado() {
-		Estado estado = new Estado();
-		estado.setSigla("SP");
-		estado.setNome("SAO PAULO");
-		return estado;
 	}
 
 	@Override
@@ -94,10 +81,53 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 	}
 
 	@Override
-	public List<Municipio> consultarMunicipios(Long idEstado) {
-		Estado estado = getEstado();
+	public List<Municipio> consultarMunicipios(String sigla) {
+		EstadoDTO[] estadosDTO = get(EstadoDTO[].class, 
+				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
+	
+		if (estadosDTO == null || estadosDTO.length == 0) {
+			return new ArrayList<>();
+		}
+
+		EstadoDTO estadoDoMunicipioDTO = null;
+		
+		for (EstadoDTO estadoDTO : estadosDTO ) {
+			
+			if (estadoDTO.getSigla().equalsIgnoreCase(sigla)) {
+				
+				estadoDoMunicipioDTO = new EstadoDTO();
+				estadoDoMunicipioDTO.setId(estadoDTO.getId());
+				estadoDoMunicipioDTO.setSigla(estadoDTO.getSigla());
+				estadoDoMunicipioDTO.setNome(estadoDoMunicipioDTO.getNome());
+				break;
+			}
+		}
+		
+		if (estadoDoMunicipioDTO == null) {
+			return new ArrayList<>();
+		}
+		
+		Estado estado = new Estado();
+		estado.setSigla(estadoDoMunicipioDTO.getSigla());
+		estado.setNome(estadoDoMunicipioDTO.getNome());
+		
+		MunicipioDTO[] municipiosDTO = get(MunicipioDTO[].class, 
+				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/{idEstado}/municipios",
+							estadoDoMunicipioDTO.getId());
+		
+		if (municipiosDTO == null || municipiosDTO.length == 0) {
+			return new ArrayList<>();
+		}
+		
 		List<Municipio> municipios = new ArrayList<>();
-		municipios.add(getMunicipio(estado));
+		
+		for (MunicipioDTO municipioDTO : municipiosDTO ) {
+			Municipio municipio = new Municipio();
+			municipio.setNome(municipioDTO.getNome());
+			municipio.setEstado(estado);
+			municipios.add(municipio);
+		}
+		
 		return municipios;
 	}
 
@@ -126,5 +156,6 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 			return null;
 		}
 	}
+	
 	
 }

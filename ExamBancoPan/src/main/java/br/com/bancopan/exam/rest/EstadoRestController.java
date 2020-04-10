@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bancopan.exam.domain.Estado;
+import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.service.def.EnderecoService;
 
 @RestController
@@ -22,6 +24,11 @@ public class EstadoRestController {
 	@GetMapping
 	public List<Estado> listarEstados() {
 		return enderecoService.listarEstados();
+	}
+	
+	@GetMapping("/{sigla}/municipio")
+	public List<Municipio> consultarMunicipios(@PathVariable String sigla) {
+		return enderecoService.consultarMunicipios(sigla);
 	}
 	
 }

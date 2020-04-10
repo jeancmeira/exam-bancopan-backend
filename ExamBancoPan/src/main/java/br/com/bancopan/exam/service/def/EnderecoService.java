@@ -14,6 +14,6 @@ public interface EnderecoService {
 	
 	public List<Estado> listarEstados();
 	
-	public List<Municipio> consultarMunicipios(Long idEstado);
+	public List<Municipio> consultarMunicipios(String sigla);
 	
 }

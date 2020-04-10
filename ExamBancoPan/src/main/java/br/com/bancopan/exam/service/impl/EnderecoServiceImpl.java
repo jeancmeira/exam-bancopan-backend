@@ -28,8 +28,8 @@ public class EnderecoServiceImpl implements EnderecoService {
 	}
 
 	@Override
-	public List<Municipio> consultarMunicipios(Long idEstado) {
-		return enderecoRepositorio.consultarMunicipios(idEstado);
+	public List<Municipio> consultarMunicipios(String sigla) {
+		return enderecoRepositorio.consultarMunicipios(sigla);
 	}
 
 }
