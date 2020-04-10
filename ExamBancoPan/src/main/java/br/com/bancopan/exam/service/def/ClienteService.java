@@ -6,6 +6,8 @@ import br.com.bancopan.exam.domain.Cliente;
 
 public interface ClienteService {
 
-	public Cliente consultarCliente(@PathVariable String cpf); 
+	public Cliente consultarCliente(@PathVariable String cpf);
+
+	public void consultarCliente(Cliente cliente); 
 		
 }

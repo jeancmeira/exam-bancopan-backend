@@ -13,4 +13,9 @@ public class ClienteServiceImpl implements ClienteService {
 		return null;
 	}
 
+	@Override
+	public void consultarCliente(Cliente cliente) {
+		
+	}
+
 }
