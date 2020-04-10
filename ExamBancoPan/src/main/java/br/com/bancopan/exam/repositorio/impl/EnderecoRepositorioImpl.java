@@ -98,7 +98,7 @@ public class EnderecoRepositorioImpl implements EnderecoRepositorio {
 				estadoDoMunicipioDTO = new EstadoDTO();
 				estadoDoMunicipioDTO.setId(estadoDTO.getId());
 				estadoDoMunicipioDTO.setSigla(estadoDTO.getSigla());
-				estadoDoMunicipioDTO.setNome(estadoDoMunicipioDTO.getNome());
+				estadoDoMunicipioDTO.setNome(estadoDTO.getNome());
 				break;
 			}
 		}
