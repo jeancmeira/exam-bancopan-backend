@@ -23,7 +23,7 @@ import br.com.bancopan.exam.port.EnderecoPort;
 
 
 @Component
-public class EnderecoAdapter implements EnderecoPort {
+public class EnderecoRestAdapter implements EnderecoPort {
 
 	@Override
 	public Cep consultarCep(String codigoCep) {

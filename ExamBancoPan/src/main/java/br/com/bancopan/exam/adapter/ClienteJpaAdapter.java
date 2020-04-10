@@ -15,7 +15,7 @@ import br.com.bancopan.exam.persistence.jpa.repository.ClienteEntityJpaRepositor
 import br.com.bancopan.exam.port.ClientePort;
 
 @Component
-public class ClienteAdapter implements ClientePort {
+public class ClienteJpaAdapter implements ClientePort {
 
 	@Autowired
 	private ClienteEntityJpaRepository clienteEntityJpaRepository;
