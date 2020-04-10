@@ -41,14 +41,7 @@ public class Cliente {
 	}
 
 	public void alterarEndereco() {
-		System.out.println(cpf);
-		System.out.println(nome);
-		System.out.println(endereco.getNumero());
-		System.out.println(endereco.getCep().getMunicipio().getEstado().getNome());
-		
-		Cliente clienteBusca = clienteRepositorio.consultarCliente(cpf);
-		System.out.println(clienteBusca.getNome());
-		
+		clienteRepositorio.alterarEndereco(this);
 	}
 	
 }

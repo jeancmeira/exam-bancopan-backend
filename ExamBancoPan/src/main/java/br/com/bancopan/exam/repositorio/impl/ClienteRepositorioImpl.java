@@ -34,4 +34,12 @@ public class ClienteRepositorioImpl implements ClienteRepositorio {
 		return cliente;
 	}
 
+	@Override
+	public void alterarEndereco(Cliente cliente) {
+		System.out.println(cliente.getCpf());
+		System.out.println(cliente.getNome());
+		System.out.println(cliente.getEndereco().getNumero());
+		System.out.println(cliente.getEndereco().getCep().getMunicipio().getEstado().getNome());
+	}
+
 }

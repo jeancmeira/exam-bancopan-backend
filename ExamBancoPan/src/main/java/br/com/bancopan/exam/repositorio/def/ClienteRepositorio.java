@@ -6,6 +6,8 @@ import br.com.bancopan.exam.domain.Cliente;
 
 public interface ClienteRepositorio {
 
-	public Cliente consultarCliente(@PathVariable String cpf); 
+	public Cliente consultarCliente(@PathVariable String cpf);
+
+	public void alterarEndereco(Cliente cliente); 
 		
 }
