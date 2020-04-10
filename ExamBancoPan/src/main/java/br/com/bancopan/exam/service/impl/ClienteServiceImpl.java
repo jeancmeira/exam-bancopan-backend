@@ -31,6 +31,14 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Boolean alterarEndereco(Cliente cliente) {
+		
+		Cliente clienteBusca = consultarCliente(cliente.getCpf());
+		if (clienteBusca == null) {
+			return Boolean.FALSE;
+		}
+		
+		clienteBusca.alterarEndereco();
+		
 		return Boolean.TRUE;
 	}
 

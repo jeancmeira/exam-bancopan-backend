@@ -33,7 +33,10 @@ public class Cliente {
 	}
 
 	public void alterarEndereco() {
-		
+		System.out.println(cpf);
+		System.out.println(nome);
+		System.out.println(endereco.getNumero());
+		System.out.println(endereco.getCep().getMunicipio().getEstado().getNome());
 	}
 	
 }
