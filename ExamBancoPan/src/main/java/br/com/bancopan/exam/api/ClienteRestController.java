@@ -30,12 +30,7 @@ public class ClienteRestController {
 	@GetMapping("/{cpf}")
 	public ResponseEntity<ClienteDto> consultarCliente(@PathVariable String cpf) {
 		
-		logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
-        
+        logger.debug("Acessando GET /cliente/{}", cpf);
         
 		ClienteDto clienteDto = consultar(cpf);
 		if (clienteDto != null) {

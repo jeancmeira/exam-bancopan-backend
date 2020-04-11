@@ -1,5 +1,7 @@
 package br.com.bancopan.exam.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,16 @@ import br.com.bancopan.exam.usecase.EnderecoUseCase;
 @CrossOrigin("*")
 public class CepRestController {
 	
+	Logger logger = LoggerFactory.getLogger(CepRestController.class);
+	
 	@Autowired
 	private EnderecoUseCase enderecoUseCase;
 
 	@GetMapping("/{codigoCep}")
 	public ResponseEntity<CepDto> consultarCep(@PathVariable String codigoCep) {
+		
+		logger.debug("Acessando GET /cep/{}", codigoCep);
+		
 		CepDto cepDto = consultar(codigoCep);
 		if (cepDto != null) {
 			return new ResponseEntity<>(cepDto, HttpStatus.OK);
