@@ -32,11 +32,21 @@ import br.com.bancopan.exam.port.EnderecoPort;
 @Component
 public class EnderecoRestAdapter implements EnderecoPort {
 
+	private static final String RJ = "RJ";
+
+	private static final String SP = "SP";
+
+	private static final int ZERO = 0;
+	
+	private static final String URL_SERVICO_MUNICIPIO = "http://servicodados.ibge.gov.br/api/v1/localidades/estados/{idEstado}/municipios";
+	private static final String URL_SERVICO_ESTADO = "http://servicodados.ibge.gov.br/api/v1/localidades/estados/";
+	private static final String URL_SERVICO_CEP = "http://viacep.com.br/ws/{codigoCep}/json";
+	
 	Logger logger = LoggerFactory.getLogger(EnderecoRestAdapter.class);
 	
 	@Override
 	public Cep consultarCep(String codigoCep) {
-		CepAdapterDto cepAdapterDto = get(CepAdapterDto.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
+		CepAdapterDto cepAdapterDto = get(CepAdapterDto.class, URL_SERVICO_CEP, codigoCep);
 		if (cepAdapterDto == null || cepAdapterDto.getCep() == null) {
 			return null;
 		} 
@@ -48,7 +58,7 @@ public class EnderecoRestAdapter implements EnderecoPort {
 	@Override
 	public List<Estado> listarEstados() {
 		EstadoAdapterDto[] estadosAdapterDto = get(EstadoAdapterDto[].class, 
-					"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
+					URL_SERVICO_ESTADO);
 		
 		if (estadosAdapterDto == null || estadosAdapterDto.length == 0) {
 			return new ArrayList<>();
@@ -64,11 +74,11 @@ public class EnderecoRestAdapter implements EnderecoPort {
 		
 		for (EstadoAdapterDto estadoAdapterDto : estadoAdapterDtoListaOrdenada ) {
 			
-			if (estadoAdapterDto.getSigla().equals("SP")) {
+			if (estadoAdapterDto.getSigla().equals(SP)) {
 				
 				estadoSP = new Estado(estadoAdapterDto.getSigla(), estadoAdapterDto.getNome());
 				
-			} else if (estadoAdapterDto.getSigla().equals("RJ")) {
+			} else if (estadoAdapterDto.getSigla().equals(RJ)) {
 				
 				estadoRJ = new Estado(estadoAdapterDto.getSigla(), estadoAdapterDto.getNome());
 				
@@ -94,9 +104,9 @@ public class EnderecoRestAdapter implements EnderecoPort {
 	@Override
 	public List<Municipio> consultarMunicipios(String sigla) {
 		EstadoAdapterDto[] estadosAdapterDto = get(EstadoAdapterDto[].class, 
-				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/");
+				URL_SERVICO_ESTADO);
 	
-		if (estadosAdapterDto == null || estadosAdapterDto.length == 0) {
+		if (estadosAdapterDto == null || estadosAdapterDto.length == ZERO) {
 			return new ArrayList<>();
 		}
 
@@ -122,10 +132,10 @@ public class EnderecoRestAdapter implements EnderecoPort {
 						estadoDoMunicipioAdapterDto.getNome());
 		
 		MunicipioAdapterDto[] municipiosAdapterDto = get(MunicipioAdapterDto[].class, 
-				"http://servicodados.ibge.gov.br/api/v1/localidades/estados/{idEstado}/municipios",
+				URL_SERVICO_MUNICIPIO,
 							estadoDoMunicipioAdapterDto.getId());
 		
-		if (municipiosAdapterDto == null || municipiosAdapterDto.length == 0) {
+		if (municipiosAdapterDto == null || municipiosAdapterDto.length == ZERO) {
 			return new ArrayList<>();
 		}
 		
