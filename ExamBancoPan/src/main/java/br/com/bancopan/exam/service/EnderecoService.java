@@ -20,6 +20,10 @@ public class EnderecoService implements EnderecoUseCase {
 	
 	@Override
 	public Cep consultarCep(String codigoCep) {
+		if (codigoCep == null || codigoCep.trim().equals("")) {
+			throw new CampoObrigatorioException("codigoCep");
+		}
+		
 		return enderecoPort.consultarCep(codigoCep);
 	}
 
