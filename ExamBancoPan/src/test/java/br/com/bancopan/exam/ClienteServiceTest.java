@@ -16,6 +16,7 @@ import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.port.ClientePort;
 import br.com.bancopan.exam.service.ClienteService;
 import br.com.bancopan.exam.validation.CampoObrigatorioException;
+import br.com.bancopan.exam.validation.TamanhoExcedidoException;
 
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 public class ClienteServiceTest {
@@ -59,7 +60,7 @@ public class ClienteServiceTest {
 	}
 
 	@Test
-	public void testAlteracaoEnderecoComCamposVazios() {
+	public void testAlteracaoEnderecoComCamposInvalidos() {
 		Cliente cliente = getCliente();
 		cliente.setCpf(null);
 		testarCampoObrigatorio(cliente, "cpf");
@@ -88,6 +89,33 @@ public class ClienteServiceTest {
 		cliente.getEndereco().setEstado(null);
 		testarCampoObrigatorio(cliente, "estado");
 		
+		/////
+		
+		
+		cliente = getCliente();
+		cliente.getEndereco().setCep(criaString(11));
+		testarTamanhoCampo(cliente, "cep");
+
+		cliente = getCliente();
+		cliente.getEndereco().setLogradouro(criaString(1000));
+		testarTamanhoCampo(cliente, "logradouro");
+
+		cliente = getCliente();
+		cliente.getEndereco().setComplemento(criaString(1000));
+		testarTamanhoCampo(cliente, "complemento");
+		
+		cliente = getCliente();
+		cliente.getEndereco().setBairro(criaString(500));
+		testarTamanhoCampo(cliente, "bairro");
+
+		cliente = getCliente();
+		cliente.getEndereco().setMunicipio(criaString(500));
+		testarTamanhoCampo(cliente, "municipio");
+
+		cliente = getCliente();
+		cliente.getEndereco().setEstado(criaString(2));
+		testarTamanhoCampo(cliente, "estado");
+	
 	}
 
 	private Cliente getCliente() {
@@ -122,5 +150,28 @@ public class ClienteServiceTest {
 		assertTrue(hasError);
 	}
 	
+	private void testarTamanhoCampo(Cliente cliente, String campo) {
+		boolean hasError = false;
+		
+		try {
+			clienteService.alterarEndereco(cliente);
+		} catch (TamanhoExcedidoException e) {
+			hasError = true;
+			assertEquals(campo, e.getCampo());
+		}
+		
+		assertTrue(hasError);
+	}
+	
+	private String criaString(int tamanho) {
+		StringBuilder stringBuilder = new StringBuilder();
 
+		for (int i = 1; i <= tamanho + 1; i++) {
+			stringBuilder.append("A");
+		}
+
+		return stringBuilder.toString();
+	}
+
+	
 }
