@@ -27,9 +27,9 @@ import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
 
-@SpringBootTest(classes = ExamBancoPanApplicationTests.class)
+@SpringBootTest(classes = ClienteTest.class)
 @TestInstance(Lifecycle.PER_CLASS)
-class ExamBancoPanApplicationTests {
+class ClienteTest {
 
 	@InjectMocks
 	private ClienteRestController clienteRestController;
@@ -38,7 +38,6 @@ class ExamBancoPanApplicationTests {
 	
 	@MockBean
 	private ClienteUseCase clienteUseCase;
-
 
     @BeforeAll
     public void setup() {
