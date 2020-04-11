@@ -114,6 +114,11 @@ class ClienteTest {
 		}
 		
 	}
+	
+	@Test
+	public void testAlterarEndereco() {
+		
+	}
 
 	private Cliente consultarCliente() {
 		Cliente cliente = new Cliente();

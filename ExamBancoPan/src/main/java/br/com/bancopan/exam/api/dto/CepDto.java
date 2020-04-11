@@ -11,6 +11,10 @@ public class CepDto {
 	@JsonInclude(Include.NON_NULL)
 	private String logradouro;
 	
+	public CepDto() {
+		
+	}
+	
 	public CepDto(String codigo, String logradouro) {
 		this.codigo = codigo;
 		this.logradouro = logradouro;
@@ -27,6 +31,16 @@ public class CepDto {
 	public String getLogradouro() {
 		return logradouro;
 	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	
+	
 
 	
 }
