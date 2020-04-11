@@ -26,6 +26,20 @@ import br.com.bancopan.exam.validation.TamanhoExcedidoException;
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 public class ClienteServiceTest {
 
+	private static final String CAMPO_ESTADO = "estado";
+
+	private static final String CAMPO_MUNICIPIO = "municipio";
+
+	private static final String CAMPO_BAIRRO = "bairro";
+
+	private static final String CAMPO_NUMERO = "numero";
+
+	private static final String CAMPO_LOGRADOURO = "logradouro";
+
+	private static final String CAMPO_CEP = "cep";
+
+	private static final String CAMPO_CPF = "cpf";
+
 	private static final String BAIRRO = "BAIRRO TESTE";
 
 	private static final int NUMERO = 111;
@@ -57,7 +71,7 @@ public class ClienteServiceTest {
 			clienteService.consultarCliente(null);
 		} catch (CampoObrigatorioException e) {
 			hasError = true;
-			assertEquals("cpf", e.getCampo());
+			assertEquals(CAMPO_CPF, e.getCampo());
 		}
 		
 		assertTrue(hasError);
@@ -68,42 +82,42 @@ public class ClienteServiceTest {
 	public void testAlteracaoEnderecoComCamposInvalidos() {
 		Cliente cliente = getCliente();
 		cliente.setCpf(null);
-		testarCampoObrigatorio(cliente, "cpf");
+		testarCampoObrigatorio(cliente, CAMPO_CPF);
 
 		cliente = getCliente();
 		cliente.getEndereco().setCep(null);
-		testarCampoObrigatorio(cliente, "cep");
+		testarCampoObrigatorio(cliente, CAMPO_CEP);
 
 		cliente = getCliente();
 		cliente.getEndereco().setLogradouro(null);
-		testarCampoObrigatorio(cliente, "logradouro");
+		testarCampoObrigatorio(cliente, CAMPO_LOGRADOURO);
 		
 		cliente = getCliente();
 		cliente.getEndereco().setNumero(null);
-		testarCampoObrigatorio(cliente, "numero");
+		testarCampoObrigatorio(cliente, CAMPO_NUMERO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setBairro(null);
-		testarCampoObrigatorio(cliente, "bairro");
+		testarCampoObrigatorio(cliente, CAMPO_BAIRRO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setMunicipio(null);
-		testarCampoObrigatorio(cliente, "municipio");
+		testarCampoObrigatorio(cliente, CAMPO_MUNICIPIO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setEstado(null);
-		testarCampoObrigatorio(cliente, "estado");
+		testarCampoObrigatorio(cliente, CAMPO_ESTADO);
 		
 		/////
 		
 		
 		cliente = getCliente();
 		cliente.getEndereco().setCep(criaString(11));
-		testarTamanhoCampo(cliente, "cep");
+		testarTamanhoCampo(cliente, CAMPO_CEP);
 
 		cliente = getCliente();
 		cliente.getEndereco().setLogradouro(criaString(1000));
-		testarTamanhoCampo(cliente, "logradouro");
+		testarTamanhoCampo(cliente, CAMPO_LOGRADOURO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setComplemento(criaString(1000));
@@ -111,15 +125,15 @@ public class ClienteServiceTest {
 		
 		cliente = getCliente();
 		cliente.getEndereco().setBairro(criaString(500));
-		testarTamanhoCampo(cliente, "bairro");
+		testarTamanhoCampo(cliente, CAMPO_BAIRRO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setMunicipio(criaString(500));
-		testarTamanhoCampo(cliente, "municipio");
+		testarTamanhoCampo(cliente, CAMPO_MUNICIPIO);
 
 		cliente = getCliente();
 		cliente.getEndereco().setEstado(criaString(2));
-		testarTamanhoCampo(cliente, "estado");
+		testarTamanhoCampo(cliente, CAMPO_ESTADO);
 	
 	}
 
