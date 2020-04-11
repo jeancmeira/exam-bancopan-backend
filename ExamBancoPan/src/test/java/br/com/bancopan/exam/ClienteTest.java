@@ -14,8 +14,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -126,18 +124,10 @@ class ClienteTest {
 	@Test
 	public void testAlterarEndereco() {
 		
-		EnderecoDto enderecoDto = getEnderecoDto();
-		
 		Mockito.when(clienteUseCase.consultarCliente(
 				anyString())).thenReturn(consultarCliente());
 		
-		Mockito.doAnswer(new Answer<Void>() {
-			  @Override
-			  public Void answer(InvocationOnMock invocation) throws Throwable {
-			    Cliente cliente = (Cliente) invocation.getArguments()[0];
-			    return null;
-			  }
-			}).when(clienteUseCase);
+		EnderecoDto enderecoDto = getEnderecoDto();
 
 		ObjectMapper mapper = new ObjectMapper();
 
