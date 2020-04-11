@@ -43,6 +43,16 @@ public class ClienteRestController {
 	@PostMapping("/{cpf}/endereco")
 	public ResponseEntity<Boolean> alterarEndereco(@RequestBody ClienteDto clienteDto) {
 		
+		logger.debug("Acessando POST /cliente/{}/endereco", clienteDto.getCpf());
+		logger.debug("Informacoes do body: ");
+		logger.debug("cep: " + clienteDto.getCep());
+		logger.debug("Municipio: " + clienteDto.getMunicipio());
+		logger.debug("Estado: " + clienteDto.getEstado());
+		logger.debug("Logradouro: " + clienteDto.getLogradouro());
+		logger.debug("Numero: " + clienteDto.getNumero());
+		logger.debug("Complemento: " + clienteDto.getComplemento());
+		logger.debug("Bairro: " + clienteDto.getBairro());
+		
 		Cliente cliente = clienteUseCase.consultarCliente(clienteDto.getCpf());
 		if (cliente == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
