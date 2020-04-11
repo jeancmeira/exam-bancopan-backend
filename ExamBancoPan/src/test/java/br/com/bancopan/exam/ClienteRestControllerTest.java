@@ -28,11 +28,12 @@ import br.com.bancopan.exam.api.dto.ClienteDto;
 import br.com.bancopan.exam.api.dto.EnderecoDto;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.domain.Endereco;
+import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
 
-@SpringBootTest(classes = ClienteTest.class)
+@SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
-class ClienteTest {
+class ClienteRestControllerTest {
 
 	private static final String CONSULTA_CLIENTE_URL = "/cliente/{cpf}";
 	

@@ -23,11 +23,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.bancopan.exam.api.CepRestController;
 import br.com.bancopan.exam.api.dto.CepDto;
 import br.com.bancopan.exam.domain.Cep;
+import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
-@SpringBootTest(classes = ClienteTest.class)
+@SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
-public class CepTest {
+public class CepRestControllerTest {
 	
 	private static final String URL_CONSULTA_CEP = "/cep/{codigoCep}";
 

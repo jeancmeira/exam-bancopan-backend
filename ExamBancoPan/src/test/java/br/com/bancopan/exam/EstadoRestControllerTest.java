@@ -28,11 +28,12 @@ import br.com.bancopan.exam.api.dto.EstadoDto;
 import br.com.bancopan.exam.api.dto.MunicipioDto;
 import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
+import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
-@SpringBootTest(classes = ClienteTest.class)
+@SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
-public class EstadoTest {
+public class EstadoRestControllerTest {
 	
 	private static final String URL_CONSULTA_ESTADO = "/estado";
 	
