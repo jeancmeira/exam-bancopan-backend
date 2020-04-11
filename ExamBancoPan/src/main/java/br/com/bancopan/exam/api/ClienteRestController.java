@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bancopan.exam.api.dto.ClienteDto;
+import br.com.bancopan.exam.api.dto.EnderecoDto;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
 
@@ -41,31 +42,30 @@ public class ClienteRestController {
 	}
 
 	@PostMapping("/{cpf}/endereco")
-	public ResponseEntity<Boolean> alterarEndereco(@RequestBody ClienteDto clienteDto) {
+	public ResponseEntity<Boolean> alterarEndereco(@PathVariable String cpf, @RequestBody EnderecoDto enderecoDto) {
 		
-		logger.debug("Acessando POST /cliente/{}/endereco", clienteDto.getCpf());
+		logger.debug("Acessando POST /cliente/{}/endereco", cpf);
 		logger.debug("Informacoes do body: ");
-		logger.debug("cep: " + clienteDto.getCep());
-		logger.debug("Municipio: " + clienteDto.getMunicipio());
-		logger.debug("Estado: " + clienteDto.getEstado());
-		logger.debug("Logradouro: " + clienteDto.getLogradouro());
-		logger.debug("Numero: " + clienteDto.getNumero());
-		logger.debug("Complemento: " + clienteDto.getComplemento());
-		logger.debug("Bairro: " + clienteDto.getBairro());
+		logger.debug("cep: " + enderecoDto.getCep());
+		logger.debug("Municipio: " + enderecoDto.getMunicipio());
+		logger.debug("Estado: " + enderecoDto.getEstado());
+		logger.debug("Logradouro: " + enderecoDto.getLogradouro());
+		logger.debug("Numero: " + enderecoDto.getNumero());
+		logger.debug("Complemento: " + enderecoDto.getComplemento());
+		logger.debug("Bairro: " + enderecoDto.getBairro());
 		
-		Cliente cliente = clienteUseCase.consultarCliente(clienteDto.getCpf());
+		Cliente cliente = clienteUseCase.consultarCliente(cpf);
 		if (cliente == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		cliente.setCpf(cliente.getCpf());
-		cliente.getEndereco().setCep(clienteDto.getCep());
-		cliente.getEndereco().setMunicipio(clienteDto.getMunicipio());
-		cliente.getEndereco().setEstado(clienteDto.getEstado());
-		cliente.getEndereco().setLogradouro(clienteDto.getLogradouro());
-		cliente.getEndereco().setNumero(clienteDto.getNumero());
-		cliente.getEndereco().setComplemento(clienteDto.getComplemento());
-		cliente.getEndereco().setBairro(clienteDto.getBairro());
+		cliente.getEndereco().setCep(enderecoDto.getCep());
+		cliente.getEndereco().setMunicipio(enderecoDto.getMunicipio());
+		cliente.getEndereco().setEstado(enderecoDto.getEstado());
+		cliente.getEndereco().setLogradouro(enderecoDto.getLogradouro());
+		cliente.getEndereco().setNumero(enderecoDto.getNumero());
+		cliente.getEndereco().setComplemento(enderecoDto.getComplemento());
+		cliente.getEndereco().setBairro(enderecoDto.getBairro());
 		
 		clienteUseCase.alterarEndereco(cliente); 
 		
@@ -82,13 +82,16 @@ public class ClienteRestController {
 		ClienteDto clienteDto = new ClienteDto();
 		clienteDto.setCpf(cliente.getCpf());
 		clienteDto.setNome(cliente.getNome());
-		clienteDto.setCep(cliente.getEndereco().getCep());
-		clienteDto.setMunicipio(cliente.getEndereco().getMunicipio());
-		clienteDto.setEstado(cliente.getEndereco().getEstado());
-		clienteDto.setLogradouro(cliente.getEndereco().getLogradouro());
-		clienteDto.setNumero(cliente.getEndereco().getNumero());
-		clienteDto.setComplemento(cliente.getEndereco().getComplemento());
-		clienteDto.setBairro(cliente.getEndereco().getBairro());
+		
+		EnderecoDto enderecoDto = new EnderecoDto();
+		enderecoDto.setCep(cliente.getEndereco().getCep());
+		enderecoDto.setMunicipio(cliente.getEndereco().getMunicipio());
+		enderecoDto.setEstado(cliente.getEndereco().getEstado());
+		enderecoDto.setLogradouro(cliente.getEndereco().getLogradouro());
+		enderecoDto.setNumero(cliente.getEndereco().getNumero());
+		enderecoDto.setComplemento(cliente.getEndereco().getComplemento());
+		enderecoDto.setBairro(cliente.getEndereco().getBairro());
+		clienteDto.setEndereco(enderecoDto);
 		
 		return clienteDto;
 	}
