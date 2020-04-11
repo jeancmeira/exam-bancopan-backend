@@ -4,6 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe de entidade de clientes
+ *
+ */
 @Entity
 @Table(name="cliente")
 public class ClienteEntity {

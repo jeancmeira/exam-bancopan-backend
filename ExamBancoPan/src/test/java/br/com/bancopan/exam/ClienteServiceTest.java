@@ -18,6 +18,11 @@ import br.com.bancopan.exam.service.ClienteService;
 import br.com.bancopan.exam.validation.CampoObrigatorioException;
 import br.com.bancopan.exam.validation.TamanhoExcedidoException;
 
+/**
+ * Classe de teste do service de clientes
+ * @author Jean
+ *
+ */
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 public class ClienteServiceTest {
 

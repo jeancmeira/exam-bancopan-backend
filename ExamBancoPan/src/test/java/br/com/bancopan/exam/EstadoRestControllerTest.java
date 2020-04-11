@@ -31,6 +31,11 @@ import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
+/**
+ * @author Jean
+ * Classe de teste do rest controller de estado
+ *
+ */
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 public class EstadoRestControllerTest {

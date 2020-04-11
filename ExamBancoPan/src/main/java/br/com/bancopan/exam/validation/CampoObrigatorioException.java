@@ -1,5 +1,11 @@
 package br.com.bancopan.exam.validation;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe de validacao de campo obrigatorio
+ */
 public class CampoObrigatorioException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

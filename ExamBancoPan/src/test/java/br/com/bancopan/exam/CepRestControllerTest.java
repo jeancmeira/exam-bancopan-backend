@@ -26,6 +26,11 @@ import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
+/**
+ * Classe de teste do rest controller de cep
+ * @author Jean
+ *
+ */
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 public class CepRestControllerTest {

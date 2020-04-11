@@ -15,6 +15,13 @@ import br.com.bancopan.exam.api.dto.CepDto;
 import br.com.bancopan.exam.domain.Cep;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
+/**
+ * 
+ * @author Jean
+ * 
+ * Classe controller de cep
+ * 
+ */
 @RestController
 @RequestMapping("/cep")
 @CrossOrigin("*")

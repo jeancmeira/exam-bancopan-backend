@@ -1,5 +1,13 @@
 package br.com.bancopan.exam.domain;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe de dominio de negocio de endereco
+ *
+ */
+
 public class Endereco {
 
 	private String cep;

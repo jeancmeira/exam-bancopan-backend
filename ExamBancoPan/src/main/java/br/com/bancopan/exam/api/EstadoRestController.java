@@ -20,6 +20,13 @@ import br.com.bancopan.exam.domain.Estado;
 import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 
+/**
+ * 
+ * @author Jean
+ * 
+ * Classe controller de estado
+ * 
+ */
 @RestController
 @RequestMapping("/estado")
 @CrossOrigin("*")

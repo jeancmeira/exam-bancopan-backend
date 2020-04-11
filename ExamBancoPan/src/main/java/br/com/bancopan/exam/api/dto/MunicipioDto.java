@@ -3,6 +3,14 @@ package br.com.bancopan.exam.api.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+/**
+ * 
+ * @author Jean
+ * 
+ * Classe dto para o rest controller de municipios
+ *
+ */
+
 public class MunicipioDto {
 
 	@JsonInclude(Include.NON_NULL)

@@ -18,6 +18,13 @@ import br.com.bancopan.exam.api.dto.EnderecoDto;
 import br.com.bancopan.exam.domain.Cliente;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
 
+/**
+ * 
+ * @author Jean
+ * 
+ * Classe controller de clientes
+ * 
+ */
 @RestController
 @RequestMapping("/cliente")
 @CrossOrigin("*")

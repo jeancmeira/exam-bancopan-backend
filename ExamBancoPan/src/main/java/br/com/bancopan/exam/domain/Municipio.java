@@ -1,5 +1,13 @@
 package br.com.bancopan.exam.domain;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe de dominio de negocio de municipio
+ *
+ */
+
 public class Municipio {
 
 	private String estado;

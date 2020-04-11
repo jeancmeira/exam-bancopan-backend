@@ -13,6 +13,12 @@ import br.com.bancopan.exam.persistence.jpa.entity.ClienteEntity;
 import br.com.bancopan.exam.persistence.jpa.repository.ClienteEntityJpaRepository;
 import br.com.bancopan.exam.port.ClientePort;
 
+/**
+ * @author Jean
+ *  
+ * Classe adapter de clientes de acordo com a arquitetura hexagonal (clean) 
+ *
+ */
 @Service
 public class ClienteJpaAdapter implements ClientePort {
 

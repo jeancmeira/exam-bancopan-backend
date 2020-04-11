@@ -23,7 +23,12 @@ import br.com.bancopan.exam.domain.Municipio;
 import br.com.bancopan.exam.port.EnderecoPort;
 
 
-
+/**
+ * @author Jean
+ *  
+ * Classe adapter de endereco de acordo com a arquitetura hexagonal (clean) 
+ *
+ */
 @Component
 public class EnderecoRestAdapter implements EnderecoPort {
 

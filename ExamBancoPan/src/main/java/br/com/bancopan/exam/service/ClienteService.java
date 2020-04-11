@@ -10,6 +10,13 @@ import br.com.bancopan.exam.usecase.ClienteUseCase;
 import br.com.bancopan.exam.validation.CampoObrigatorioException;
 import br.com.bancopan.exam.validation.TamanhoExcedidoException;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe service (implementacao de use case) de clientes segundo a arquitetura hexagonal (clean)
+ *
+ */
 @Service
 public class ClienteService implements ClienteUseCase {
 

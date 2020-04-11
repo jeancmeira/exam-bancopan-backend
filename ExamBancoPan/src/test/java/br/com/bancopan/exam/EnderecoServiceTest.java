@@ -19,6 +19,11 @@ import br.com.bancopan.exam.port.EnderecoPort;
 import br.com.bancopan.exam.service.EnderecoService;
 import br.com.bancopan.exam.validation.CampoObrigatorioException;
 
+/**
+ * Classe de teste do service de endereco
+ * @author Jean
+ *
+ */
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 public class EnderecoServiceTest {
 

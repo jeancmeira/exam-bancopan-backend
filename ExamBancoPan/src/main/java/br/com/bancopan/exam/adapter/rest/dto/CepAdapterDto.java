@@ -1,5 +1,11 @@
 package br.com.bancopan.exam.adapter.rest.dto;
 
+/**
+ * @author Jean
+ *  
+ * Dto para obter informacoes do servico rest de cep 
+ *
+ */
 public class CepAdapterDto {
 	
 	private String cep;

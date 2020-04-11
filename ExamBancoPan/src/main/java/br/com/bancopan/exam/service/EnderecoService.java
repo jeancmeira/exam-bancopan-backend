@@ -12,6 +12,13 @@ import br.com.bancopan.exam.port.EnderecoPort;
 import br.com.bancopan.exam.usecase.EnderecoUseCase;
 import br.com.bancopan.exam.validation.CampoObrigatorioException;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe service (implementacao de use case) de endereco segundo a arquitetura hexagonal (clean)
+ *
+ */
 @Service
 public class EnderecoService implements EnderecoUseCase {
 

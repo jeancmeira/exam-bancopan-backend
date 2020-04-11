@@ -1,5 +1,12 @@
 package br.com.bancopan.exam.adapter.rest.dto;
 
+/**
+ * @author Jean
+ *  
+ * Dto para obter informacoes do servico rest de estado 
+ *
+ */
+
 public class EstadoAdapterDto {
 
 	private Integer id;

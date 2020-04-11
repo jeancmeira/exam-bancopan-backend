@@ -7,6 +7,13 @@ import org.springframework.stereotype.Repository;
 
 import br.com.bancopan.exam.persistence.jpa.entity.ClienteEntity;
 
+/**
+ * 
+ * @author Jean
+ *
+ *Classe de repositorio da entidade de clientes
+ *
+ */
 @Repository
 public interface ClienteEntityJpaRepository extends JpaRepository<ClienteEntity, String> {
 

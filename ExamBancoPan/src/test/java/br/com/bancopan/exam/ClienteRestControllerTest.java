@@ -31,6 +31,11 @@ import br.com.bancopan.exam.domain.Endereco;
 import br.com.bancopan.exam.main.ExamBancoPanApplication;
 import br.com.bancopan.exam.usecase.ClienteUseCase;
 
+/**
+ * Classe de teste do rest controller de clientes
+ * @author Jean
+ *
+ */
 @SpringBootTest(classes = ExamBancoPanApplication.class)
 @TestInstance(Lifecycle.PER_CLASS)
 class ClienteRestControllerTest {
