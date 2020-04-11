@@ -29,7 +29,7 @@ public class EnderecoServiceTest {
 	private EnderecoPort enderecoPort;
 
 	@Test
-	public void testConsultaCep() {
+	public void testConsultaCepComCepVazio() {
 		
 		Mockito.when(enderecoPort.consultarCep(
 				anyString())).thenReturn(retornaCepNull());
@@ -48,7 +48,7 @@ public class EnderecoServiceTest {
 	}
 
 	@Test
-	public void testConsultaMunicipios() {
+	public void testConsultaMunicipiosComEstadoVazio() {
 		
 		Mockito.when(enderecoPort.consultarMunicipios(
 				anyString())).thenReturn(retornaListMunicipiosNull());
