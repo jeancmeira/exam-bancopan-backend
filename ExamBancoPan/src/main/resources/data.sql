@@ -13,5 +13,6 @@ CREATE TABLE cliente (
 );
  
 INSERT INTO cliente (cpf, nome, cep, logradouro, numero, complemento, bairro, municipio, estado) VALUES
-  ('21250868831', 'JEAN MEIRA', '04349000', 'RUA DAS GRUMIXAMAS', 327, 'AP 103', 'JABAQUARA', 'SAO PAULO', 'SP');
+  ('21250868831', 'JEAN MEIRA', '04349000', 'RUA DAS GRUMIXAMAS', 327, 'AP 103', 'JABAQUARA', 'SAO PAULO', 'SP'),
+  ('12345678910', 'CLIENTE TESTE', '04349000', 'RUA DAS GRUMIXAMAS', 400, NULL, 'JABAQUARA', 'SAO PAULO', 'SP');
 ;
