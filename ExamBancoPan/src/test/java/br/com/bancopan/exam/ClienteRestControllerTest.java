@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -141,7 +141,7 @@ class ClienteRestControllerTest {
 			
 			String json = mapper.writeValueAsString(enderecoDto);
 			
-			MvcResult mvcResult = mockMvc.perform(post(ALTERA_ENDERECO_URL, CPF).contentType(
+			MvcResult mvcResult = mockMvc.perform(put(ALTERA_ENDERECO_URL, CPF).contentType(
 		            MediaType.APPLICATION_JSON).content(json)).andReturn();
 
 			assertEquals(HTTP_STATUS_OK, mvcResult.getResponse().getStatus());
