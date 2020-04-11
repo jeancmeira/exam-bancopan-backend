@@ -31,6 +31,28 @@ import br.com.bancopan.exam.usecase.ClienteUseCase;
 @TestInstance(Lifecycle.PER_CLASS)
 class ClienteTest {
 
+	private static final String CONSULTA_CLIENTE_URL = "/cliente/{cpf}";
+
+	private static final int HTTP_STATUS_OK = 200;
+
+	private static final String BAIRRO = "BAIRRO TESTE";
+
+	private static final String COMPLEMENTO = "COMPLEMENTO TESTE";
+
+	private static final int NUMERO = 111;
+
+	private static final String LOGRADOURO = "RUA TESTE";
+
+	private static final String ESTADO = "AM";
+
+	private static final String MUNICPIO = "MUNCIPIO TESTE";
+
+	private static final String CEP = "04349000";
+
+	private static final String NOME = "CLIENTE TESTE";
+
+	private static final String CPF = "123.456.789-10";
+
 	@InjectMocks
 	private ClienteRestController clienteRestController;
 	
@@ -56,15 +78,36 @@ class ClienteTest {
 		ObjectMapper mapper = new ObjectMapper();
 
 		try {
-			MvcResult mvcResult = mockMvc.perform(get("/cliente/{cpf}", "21250868831")).andReturn();
+			MvcResult mvcResult = mockMvc.perform(get(CONSULTA_CLIENTE_URL, CPF)).andReturn();
 
-			assertEquals(mvcResult.getResponse().getStatus(), 200);
+			assertEquals(mvcResult.getResponse().getStatus(), HTTP_STATUS_OK);
 			
-			ClienteDto parsedResponse = mapper.readValue(mvcResult.getResponse().getContentAsByteArray(), ClienteDto.class);
+			ClienteDto clienteDto = mapper.readValue(mvcResult.getResponse().getContentAsByteArray(), ClienteDto.class);
 			
-			assertNotNull(parsedResponse);
-			assertNotNull(parsedResponse.getCpf());
-			assertNotNull(parsedResponse.getNome());
+			assertNotNull(clienteDto);
+
+			assertNotNull(clienteDto.getCpf());
+			assertNotNull(clienteDto.getNome());
+
+			assertNotNull(clienteDto.getCep());
+			assertNotNull(clienteDto.getMunicipio());
+			assertNotNull(clienteDto.getEstado());
+			assertNotNull(clienteDto.getLogradouro());
+			assertNotNull(clienteDto.getNumero());
+			assertNotNull(clienteDto.getComplemento());
+			assertNotNull(clienteDto.getBairro());
+			
+			assertEquals(clienteDto.getCpf(), CPF);
+			assertEquals(clienteDto.getNome(), NOME);
+
+			assertEquals(clienteDto.getCep(), CEP);
+			assertEquals(clienteDto.getMunicipio(), MUNICPIO);
+			assertEquals(clienteDto.getEstado(), ESTADO);
+			assertEquals(clienteDto.getLogradouro(), LOGRADOURO);
+			assertEquals(clienteDto.getNumero(), NUMERO);
+			assertEquals(clienteDto.getComplemento(), COMPLEMENTO);
+			assertEquals(clienteDto.getBairro(), BAIRRO);
+
 			
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -74,11 +117,18 @@ class ClienteTest {
 
 	private Cliente consultarCliente() {
 		Cliente cliente = new Cliente();
-		cliente.setCpf("212.508.688-31");
-		cliente.setNome("CLIENTE TESTE");
+		cliente.setCpf(CPF);
+		cliente.setNome(NOME);
 		
 		Endereco endereco = new Endereco();
-		endereco.setCep("04349000");
+		endereco.setCep(CEP);
+		endereco.setMunicipio(MUNICPIO);
+		endereco.setEstado(ESTADO);
+		endereco.setLogradouro(LOGRADOURO);
+		endereco.setNumero(NUMERO);
+		endereco.setComplemento(COMPLEMENTO);
+		endereco.setBairro(BAIRRO);
+		
 		cliente.setEndereco(endereco);
 		
 		return cliente;
