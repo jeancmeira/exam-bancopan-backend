@@ -29,7 +29,7 @@ import br.com.bancopan.exam.port.EnderecoPort;
  * Classe adapter de endereco de acordo com a arquitetura hexagonal (clean) 
  *
  */
-@Component
+@Component 
 public class EnderecoRestAdapter implements EnderecoPort {
 
 	private static final String RJ = "RJ";
