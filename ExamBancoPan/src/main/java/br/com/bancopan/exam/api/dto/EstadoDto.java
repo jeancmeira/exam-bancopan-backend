@@ -11,6 +11,10 @@ public class EstadoDto {
 	@JsonInclude(Include.NON_NULL)
 	private String nome;
 
+	public EstadoDto() {
+		
+	}
+	
 	public EstadoDto(String sigla, String nome) {
 		this.sigla = sigla;
 		this.nome = nome;
@@ -23,6 +27,15 @@ public class EstadoDto {
 	public String getNome() {
 		return nome;
 	}
+
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 
 	
 }
