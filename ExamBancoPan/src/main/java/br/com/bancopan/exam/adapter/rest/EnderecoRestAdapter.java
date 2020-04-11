@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,6 +27,8 @@ import br.com.bancopan.exam.port.EnderecoPort;
 @Component
 public class EnderecoRestAdapter implements EnderecoPort {
 
+	Logger logger = LoggerFactory.getLogger(EnderecoRestAdapter.class);
+	
 	@Override
 	public Cep consultarCep(String codigoCep) {
 		CepAdapterDto cepAdapterDto = get(CepAdapterDto.class, "http://viacep.com.br/ws/{codigoCep}/json", codigoCep);
@@ -134,6 +138,12 @@ public class EnderecoRestAdapter implements EnderecoPort {
 	}
 	
 	private <T> T get(Class<T> resultClass, String url, Object parameterValue) {
+		
+		logger.debug("Acessando integracao REST no path {}", url);
+		if (parameterValue != null) {
+			logger.debug("Parametro {}", parameterValue);
+		}
+		
 		try {
 			RestTemplate restTemplate = new RestTemplate();
 			
@@ -146,11 +156,20 @@ public class EnderecoRestAdapter implements EnderecoPort {
 			);
 
 			if (response.getStatusCode() == HttpStatus.OK) {
+				
+				logger.debug("Retorno com sucesso {}", response.getBody().toString());
+				
 				return response.getBody();
 			} else  {
+				
+				logger.debug("Retorno com erro {}", response.getStatusCode());
+				
 				return null;
 			}
 		} catch (Exception e) {
+			
+			logger.error("Error ao executar integracao REST", e);
+			
 			return null;
 		}
 	}
