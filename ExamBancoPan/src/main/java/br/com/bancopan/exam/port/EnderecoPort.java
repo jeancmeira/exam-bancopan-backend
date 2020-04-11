@@ -12,7 +12,7 @@ import br.com.bancopan.exam.domain.Municipio;
  * 
  * @author Jean
  *
- *Classe port de endereco segunda a arquitetura hexagonal (clean)
+ *Interface port de endereco segundo a arquitetura hexagonal (clean)
  *
  */
 

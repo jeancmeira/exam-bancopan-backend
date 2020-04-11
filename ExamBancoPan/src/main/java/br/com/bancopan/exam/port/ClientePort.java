@@ -8,7 +8,7 @@ import br.com.bancopan.exam.domain.Cliente;
  * 
  * @author Jean
  *
- *Classe port de clientes segunda a arquitetura hexagonal (clean)
+ *Interface port de clientes segundo a arquitetura hexagonal (clean)
  *
  */
 public interface ClientePort {

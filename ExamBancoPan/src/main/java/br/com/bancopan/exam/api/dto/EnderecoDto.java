@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * 
  * @author Jean
  * 
- * Classe dto para o rest controller de enddereco
+ * Classe dto para o rest controller de endereco
  *
  */
 
