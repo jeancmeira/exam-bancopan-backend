@@ -1,5 +1,7 @@
 package br.com.bancopan.exam.api;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +22,21 @@ import br.com.bancopan.exam.usecase.ClienteUseCase;
 @CrossOrigin("*")
 public class ClienteRestController {
 
+	Logger logger = LoggerFactory.getLogger(ClienteRestController.class);
+	
 	@Autowired
 	private ClienteUseCase clienteUseCase;
 	
 	@GetMapping("/{cpf}")
 	public ResponseEntity<ClienteDto> consultarCliente(@PathVariable String cpf) {
+		
+		logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
+        
+        
 		ClienteDto clienteDto = consultar(cpf);
 		if (clienteDto != null) {
 			return new ResponseEntity<>(clienteDto, HttpStatus.OK);
